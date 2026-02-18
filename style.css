@@ -98,15 +98,6 @@ body {
     border-radius: 3px;
 }
 
-/* Ефект ховера — м'яке підсвічування фону */
-/* .bible-link:hover {
-    background-color: #eef2ff; /* Легкий блакитний фон при наведенні */
-}
-
-.bible-link:hover {
-    background: #eef2ff;
-} */
-
 /* Виправлення вікна: додаємо прокрутку та обмеження по висоті */
 .modal {
     position: fixed;
