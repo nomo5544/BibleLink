@@ -80,11 +80,12 @@ body {
 
 /* --- Стилі основного тексту на аркуші --- */
 #textcontent {
-    font-size: 26px; /* Встановіть 26px або навіть 28px для максимального масштабу */
-    line-height: 1.6;
+    font-size: 26px; /* Базовий розмір шрифту */
+    line-height: 1.6; /* Масштабування міжрядкового інтервалу */
     color: #2c3e50;
     max-width: 950px; /* Ширина текстового блоку */
     margin: 0 auto;
+    padding: 20px;
     padding-bottom: 50px;
     white-space: pre-wrap; /* Щоб зберігалися абзаци */
 }
