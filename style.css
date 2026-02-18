@@ -23,9 +23,11 @@ body {
     z-index: 10;
 }
 
+/* Оновлений стиль для закладки, щоб хрестик був зручним */
 .side-tab {
-    background: #d2b48c; /* Колір крафтового паперу */
-    padding: 15px 8px;
+    position: relative; /* Додаємо для позиціювання хрестика */
+    background: #d2b48c;
+    padding: 25px 8px 15px 8px; /* Збільшили верхній відступ для хрестика */
     writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: rotate(180deg);
@@ -36,6 +38,8 @@ body {
     font-weight: bold;
     color: #5d2e0a;
     transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
 }
 
 .side-tab:hover {
@@ -134,17 +138,31 @@ body {
 }
 
 /* Кнопка видалення всередині закладки */
+/* Покращений хрестик видалення */
 .delete-tab {
-    font-size: 10px;
-    margin-bottom: 5px;
+    position: absolute;
+    top: 5px;   /* Завжди зверху закладки */
+    right: 5px; /* Центруємо по ширині */
+    font-size: 14px;
     color: #8b4513;
-    opacity: 0.5;
-    transition: opacity 0.2s;
+    opacity: 0.3;
+    transition: opacity 0.2s, transform 0.2s;
+    writing-mode: horizontal-tb; /* Хрестик має бути рівним, не вертикальним */
+    transform: rotate(180deg);   /* Компенсуємо поворот самої закладки */
 }
 
 .delete-tab:hover {
     opacity: 1;
     color: #e74c3c;
+    transform: rotate(180deg) scale(1.2);
+}
+
+/* Додамо стиль для контейнера кнопок у модалці */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}color: #e74c3c;
 }
 #pageTitle {
     width: 100%;
