@@ -92,7 +92,7 @@ body {
     background: #eef2ff;
 }
 
-/* --- Модальне вікно (Діалог додавання) --- */
+/* Виправлення вікна: додаємо прокрутку та обмеження по висоті */
 .modal {
     position: fixed;
     z-index: 1000;
@@ -100,31 +100,52 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.6);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px; /* Відступи від країв екрану */
+    box-sizing: border-box;
 }
 
 .modal-content {
     background: white;
-    padding: 30px;
+    padding: 25px;
     border-radius: 12px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 900px; /* Збільшили ширину */
+    max-height: 90vh; /* Максимальна висота - 90% екрану */
+    overflow-y: auto; /* Додаємо прокрутку, якщо текст великий */
+    box-shadow: 0 5px 30px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
 }
 
+/* Збільшуємо поле вводу тексту */
 #inputArea {
-    border: 1px solid #ddd;
-    padding: 15px;
-    min-height: 200px;
+    border: 2px solid #d2b48c;
+    padding: 20px;
+    min-height: 400px; /* Збільшена мінімальна висота */
     margin: 15px 0;
     font-size: 18px;
-    border-radius: 5px;
-    overflow-y: auto;
+    border-radius: 8px;
+    background: #fff;
+    overflow-y: visible; /* Дозволяємо рости всередині контенту */
 }
 
+/* Кнопка видалення всередині закладки */
+.delete-tab {
+    font-size: 10px;
+    margin-bottom: 5px;
+    color: #8b4513;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.delete-tab:hover {
+    opacity: 1;
+    color: #e74c3c;
+}
 #pageTitle {
     width: 100%;
     padding: 10px;
