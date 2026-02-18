@@ -1,15 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Текст</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Text Preview</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
     <div class="doc-container">
-        <div id="textcontent"></div>
+        <div class="input-section" style="margin-bottom: 30px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+            <h3 style="margin-top: 0;">Вставте ваш текст тут:</h3>
+            <div contenteditable="true" id="inputArea" 
+                 style="border: 2px dashed #8b4513; padding: 15px; min-height: 100px; background: white; font-size: 18px;">
+            </div>
+            <button onclick="saveAndRender()" style="margin-top: 15px; padding: 10px 20px; cursor: pointer; background: #8b4513; color: white; border: none; border-radius: 5px;">
+                Обробити текст
+            </button>
+        </div>
+
+        <hr>
+
+        <div id="textcontent" style="margin-top: 20px;">
+            </div>
     </div>
+
     <script src="textPage.js"></script>
+
+    <script>
+    function saveAndRender() {
+        const input = document.getElementById('inputArea').innerHTML;
+        if (input.trim() === "") {
+            alert("Будь ласка, вставте текст.");
+            return;
+        }
+        localStorage.setItem("copiedHtml", input);
+        // Замість повної перезагрузки можна просто викликати render(), 
+        // якщо вона доступна глобально в textPage.js
+        if (typeof render === "function") {
+            render();
+        } else {
+            location.reload();
+        }
+    }
+    </script>
 </body>
 </html>
