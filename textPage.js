@@ -89,11 +89,11 @@ function renderTabs() {
     const tabsContainer = document.getElementById("side-tabs");
     if (!tabsContainer) return;
 
-    // Зберігаємо кнопку "+"
     const addBtn = `<button class="add-tab-btn" onclick="openAddDialog()" title="Додати нову сторінку">+</button>`;
     
     let tabsHtml = pages.map((page, index) => `
         <div class="side-tab ${currentPageIndex === index ? 'active' : ''}" onclick="loadPage(${index})">
+            <span class="delete-tab" onclick="deletePage(event, ${index})">✕</span>
             ${page.title}
         </div>
     `).join('');
@@ -111,6 +111,23 @@ function loadPage(index) {
         setupEventListeners(container);
     }
     renderTabs();
+}
+
+function deletePage(event, index) {
+    event.stopPropagation(); // Щоб не спрацював клік по самій закладці
+    if (confirm(`Видалити сторінку "${pages[index].title}"?`)) {
+        pages.splice(index, 1); // Видаляємо з масиву
+        localStorage.setItem("bible_pages", JSON.stringify(pages)); // Оновлюємо сховище
+        
+        if (currentPageIndex === index) {
+            currentPageIndex = null;
+            document.getElementById("textcontent").innerHTML = "<p>Оберіть закладку...</p>";
+        } else if (currentPageIndex > index) {
+            currentPageIndex--; // Зсуваємо індекс активної сторінки
+        }
+        
+        renderTabs();
+    }
 }
 
 function processText(html) {
@@ -144,11 +161,15 @@ function closeAddDialog() {
     document.getElementById("inputArea").innerHTML = "";
 }
 
+// Також оновимо saveNewPage, щоб вона автоматично фокусувалася на новій сторінці
 function saveNewPage() {
-    const title = document.getElementById("pageTitle").value.trim() || "Без назви";
-    const content = document.getElementById("inputArea").innerHTML;
+    const titleInput = document.getElementById("pageTitle");
+    const contentInput = document.getElementById("inputArea");
     
-    if (content.trim() === "") {
+    const title = titleInput.value.trim() || "Без назви";
+    const content = contentInput.innerHTML;
+    
+    if (content.trim() === "" || content === "<br>") {
         alert("Текст порожній!");
         return;
     }
@@ -157,7 +178,8 @@ function saveNewPage() {
     localStorage.setItem("bible_pages", JSON.stringify(pages));
     
     closeAddDialog();
-    loadPage(pages.length - 1); // Переходимо на нову сторінку
+    renderTabs();
+    loadPage(pages.length - 1);
 }
 
 // --- Функції Tooltip (Ваш оригінальний код) ---
