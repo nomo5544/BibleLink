@@ -1,7 +1,9 @@
 let bibleData = {};
 let tooltip = null;
-let pages = JSON.parse(localStorage.getItem("bible_pages")) || [];
 let currentPageIndex = null;
+
+// Отримуємо збережені сторінки або створюємо порожній масив, якщо їх ще немає
+let pages = JSON.parse(localStorage.getItem("bible_pages")) || [];
 
 // Словник скорочень (переконайтеся, що він у вас є в коді або окремому файлі)
 const bookNameMap = {
