@@ -1,4 +1,3 @@
-
 // Ініціалізація даних
 let bibleData = {};
 let tooltip = null;
@@ -75,7 +74,6 @@ const bookNameMap = {
     "Об": "Об'явлення", "Об'яв": "Об'явлення", "Одкр": "Об'явлення", "Об'явлення": "Об'явлення"
 };
 
-// 1. Завантаження бази
 fetch('bibleText.json')
     .then(r => r.json())
     .then(data => {
@@ -85,7 +83,6 @@ fetch('bibleText.json')
     })
     .catch(err => console.error("Помилка завантаження бази:", err));
 
-// 2. Рендер закладок
 function renderTabs() {
     const container = document.getElementById("side-tabs");
     if (!container) return;
@@ -101,7 +98,6 @@ function renderTabs() {
     container.innerHTML = tabsHtml + addBtn;
 }
 
-// 3. Завантаження конкретної сторінки
 function loadPage(index) {
     currentPageIndex = index;
     const page = pages[index];
@@ -114,7 +110,6 @@ function loadPage(index) {
     renderTabs();
 }
 
-// 4. Обробка тексту (Regex)
 function processText(html) {
     if (!html) return "";
     let txt = html.replace(/&nbsp;/g, ' ').replace(/\u00a0/g, ' ');
@@ -125,11 +120,14 @@ function processText(html) {
         const fullBook = bookNameMap[cleanBook];
         if (!fullBook) return match;
 
-        return `<span class="bible-link" data-book="${fullBook}" data-chapter="${ch}" data-verses="${vs || '1'}">${match}</span>`;
+        return `<span class="bible-link" 
+                data-book="${fullBook}" 
+                data-chapter="${ch}" 
+                data-verses="${vs || '1'}"
+                style="color: blue !important; cursor: pointer !important;">${match}</span>`;
     });
 }
 
-// 5. Модальне вікно
 function openAddDialog() {
     document.getElementById("addDialog").style.display = "flex";
 }
@@ -157,41 +155,47 @@ function saveNewPage() {
 
 function deletePage(e, index) {
     e.stopPropagation();
-    if (confirm("Видалити цю сторінку?")) {
+    if (confirm(`Видалити сторінку "${pages[index].title}"?`)) {
         pages.splice(index, 1);
         localStorage.setItem("bible_pages", JSON.stringify(pages));
         if (currentPageIndex === index) currentPageIndex = null;
-        location.reload(); // Найнадійніший спосіб оновити стан
+        renderTabs();
+        location.reload(); 
     }
 }
 
-// 6. Tooltips та Події
+// --- ПОВЕРНЕНО ВАШІ ОРИГІНАЛЬНІ ФУНКЦІЇ ТУЛТІПІВ ТА ПОДІЙ ---
+
 function setupEventListeners(container) {
     container.addEventListener('mouseover', (e) => {
         const link = e.target.closest('.bible-link');
         if (link) {
-            const combinedText = getCombinedText(
-                link.dataset.book, 
-                link.dataset.chapter, 
-                link.dataset.verses
-            );
+            const book = link.getAttribute('data-book');
+            const chapter = link.getAttribute('data-chapter');
+            const versesStr = link.getAttribute('data-verses');
+            const combinedText = getCombinedText(book, chapter, versesStr);
             if (combinedText) showTooltip(e, combinedText);
         }
     });
+
     container.addEventListener('mousemove', (e) => {
         if (tooltip) {
             tooltip.style.left = (e.pageX + 15) + 'px';
             tooltip.style.top = (e.pageY + 15) + 'px';
         }
     });
+
     container.addEventListener('mouseout', (e) => {
-        if (e.target.closest('.bible-link')) hideTooltip();
+        if (e.target.closest('.bible-link')) {
+            hideTooltip();
+        }
     });
 }
 
 function getCombinedText(book, chapter, versesStr) {
     const verseNumbers = versesStr.match(/\d+/g);
     if (!verseNumbers) return null;
+
     let result = [];
     if (versesStr.includes('-') || versesStr.includes('–')) {
         const start = parseInt(verseNumbers[0]);
@@ -212,17 +216,26 @@ function getCombinedText(book, chapter, versesStr) {
 function showTooltip(event, text) {
     hideTooltip();
     tooltip = document.createElement('div');
-    tooltip.className = "bible-tooltip"; // Краще стилізувати в CSS
-    tooltip.style.cssText = `position: absolute; background: white; border: 1px solid #8b4513; padding: 15px; z-index: 10000; font-size: 20px; max-width: 500px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); pointer-events: none;`;
+    // Повернуто ваші точні налаштування стилів та розміру 22px
+    tooltip.style.cssText = `
+        position: absolute; background: #ffffff; border: 1px solid #8b4513; 
+        padding: 15px; z-index: 10000; font-size: 22px; max-width: 550px; 
+        border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+        color: #2c3e50; line-height: 1.5; pointer-events: none;
+    `;
     tooltip.innerHTML = text;
     document.body.appendChild(tooltip);
+    tooltip.style.left = (event.pageX + 15) + 'px';
+    tooltip.style.top = (event.pageY + 15) + 'px';
 }
 
 function hideTooltip() {
-    if (tooltip) { tooltip.remove(); tooltip = null; }
+    if (tooltip) {
+        tooltip.remove();
+        tooltip = null;
+    }
 }
 
-// 7. Service Worker
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(err => console.error(err));
 }
