@@ -115,8 +115,8 @@ body {
 /* --- СУПЕР-ФОРСОВАНИЙ МАСШТАБ (Ігнорує все інше) --- */
 #textcontent, 
 #textcontent * {
-    font-size: 32px !important; 
-    line-height: 1.7 !important;
+    font-size: 26px !important; 
+    line-height: 1.6 !important;
     font-family: 'Segoe UI', sans-serif !important;
     color: #2c3e50;
     max-width:1100px; /* Дозволяємо тексту займати більше місця */
