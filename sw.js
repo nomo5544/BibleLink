@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bible-app-v1.04';
+const CACHE_NAME = 'bible-app-v1.041';
 const urlsToCache = [
   './',
   './textPage.html',
