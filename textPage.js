@@ -1,5 +1,7 @@
 let bibleData = {};
 let tooltip = null;
+let pages = JSON.parse(localStorage.getItem("bible_pages")) || [];
+let currentPageIndex = null;
 
 // Словник скорочень (переконайтеся, що він у вас є в коді або окремому файлі)
 const bookNameMap = {
@@ -76,48 +78,90 @@ fetch('bibleText.json')
     .then(response => response.json())
     .then(data => {
         bibleData = data;
-        render(); // Викликаємо рендер після завантаження бази
+        renderTabs(); // Спочатку малюємо закладки
+        if (pages.length > 0) loadPage(0); // Завантажуємо першу сторінку, якщо вона є
     })
     .catch(err => console.error("Помилка завантаження JSON:", err));
 
-// 2. Функція рендеру (адаптована під PWA)
-function render() {
-    // ЗАМІНА: Замість chrome.storage використовуємо localStorage
-    // Вчитель може просто вставити текст у поле (яке ми додамо) або ми беремо останній збережений
-    const savedHtml = localStorage.getItem("copiedHtml");
+// --- Керування сторінками (Закладки) ---
+
+function renderTabs() {
+    const tabsContainer = document.getElementById("side-tabs");
+    if (!tabsContainer) return;
+
+    // Зберігаємо кнопку "+"
+    const addBtn = `<button class="add-tab-btn" onclick="openAddDialog()" title="Додати нову сторінку">+</button>`;
     
-    if (!savedHtml) {
-        document.getElementById("textcontent").innerHTML = "<p>Будь ласка, вставте текст для аналізу...</p>";
-        return;
-    }
+    let tabsHtml = pages.map((page, index) => `
+        <div class="side-tab ${currentPageIndex === index ? 'active' : ''}" onclick="loadPage(${index})">
+            ${page.title}
+        </div>
+    `).join('');
 
+    tabsContainer.innerHTML = tabsHtml + addBtn;
+}
+
+function loadPage(index) {
+    currentPageIndex = index;
+    const page = pages[index];
     const container = document.getElementById("textcontent");
-    let html = savedHtml;
+    
+    if (page) {
+        container.innerHTML = processText(page.content);
+        setupEventListeners(container);
+    }
+    renderTabs();
+}
 
-    // Очищаємо пробіли
-    html = html.replace(/&nbsp;/g, ' ').replace(/\u00a0/g, ' ');
-
-    // Ваш Regex залишається без змін
+function processText(html) {
+    if (!html) return "";
+    let processed = html.replace(/&nbsp;/g, ' ').replace(/\u00a0/g, ' ');
+    
     const bibleRegex = /(\d?\s?[А-Яа-яІЇЄҐ][а-яіїєґ']{0,15}\.?)\s*(\d+)(?:\s*[\:\.]\s*(\d+(?:\s*[,\-\–]\s*\d+)*))?/g;
 
-    const processedHtml = html.replace(bibleRegex, function (match, bookPart, chapter, versesStr) {
+    return processed.replace(bibleRegex, function (match, bookPart, chapter, versesStr) {
         const cleanBookKey = bookPart.trim().replace(/\.$/, "");
         const fullBookName = bookNameMap[cleanBookKey];
-
         if (!fullBookName) return match;
 
         return `<span class="bible-link" 
                 data-book="${fullBookName}" 
                 data-chapter="${chapter}" 
                 data-verses="${versesStr || "1"}" 
-                style="color: blue !important; cursor: pointer !important; ">${match}</span>`;
+                style="color: blue !important; cursor: pointer !important;">${match}</span>`;
     });
-
-    container.innerHTML = processedHtml;
-    setupEventListeners(container);
 }
 
-// 3. Ваші функції Tooltip (без змін, вони працюють у вебі ідеально)
+// --- Діалогове вікно (Модалка) ---
+
+function openAddDialog() {
+    document.getElementById("addDialog").style.display = "flex";
+}
+
+function closeAddDialog() {
+    document.getElementById("addDialog").style.display = "none";
+    document.getElementById("pageTitle").value = "";
+    document.getElementById("inputArea").innerHTML = "";
+}
+
+function saveNewPage() {
+    const title = document.getElementById("pageTitle").value.trim() || "Без назви";
+    const content = document.getElementById("inputArea").innerHTML;
+    
+    if (content.trim() === "") {
+        alert("Текст порожній!");
+        return;
+    }
+
+    pages.push({ title, content });
+    localStorage.setItem("bible_pages", JSON.stringify(pages));
+    
+    closeAddDialog();
+    loadPage(pages.length - 1); // Переходимо на нову сторінку
+}
+
+// --- Функції Tooltip (Ваш оригінальний код) ---
+
 function setupEventListeners(container) {
     container.addEventListener('mouseover', (e) => {
         const link = e.target.closest('.bible-link');
@@ -187,11 +231,11 @@ function hideTooltip() {
     }
 }
 
-// 4. Реєстрація Service Worker (для офлайн роботи)
+// 4. Реєстрація Service Worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('SW registered!', reg))
+            .then(reg => console.log('SW registered!'))
             .catch(err => console.log('SW registration failed:', err));
     });
 }
