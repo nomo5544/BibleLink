@@ -1,3 +1,4 @@
+
 * {
     box-sizing: border-box;
 }
@@ -5,7 +6,6 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100vh;
     background-color: #f8f9fa;
 }
 
@@ -14,24 +14,56 @@ body, html {
     margin: 48px auto;
     background-color: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    padding: 46px 96px;
+    
+    /* Стандартні поля */
+    padding: 46px 96px; 
+    
     font-family: 'Times New Roman', serif;
     font-size: 11pt;
-    line-height: 1.15;
-    transform-origin: top; /* Додаємо точку масштабування */
-    transform: scale(1.7); /* Додаємо початковий масштаб */
+    line-height: 1.5; /* Трохи збільшимо для Google Docs стилю */
+    
+    transform-origin: top center;
+    transform: scale(1.7);
+    
+    /* Гарантуємо, що текст не вилітає за межі при масштабуванні */
+    overflow-wrap: break-word;
 }
 
-#content {
+#textcontent {
     white-space: pre-wrap;
+    text-align: left;
+    width: auto;
 }
-.tooltip {
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 8px;
-    font-size: 40px; /* Змінено розмір шрифта */
-    z-index: 1000;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+
+/* --- ТАБУЛЯЦІЯ --- */
+.tab-marker {
+    display: inline-block;
+    /* Фіксована ширина для цифри з крапкою */
+    /* Завдяки цьому весь текст після цифри буде вирівняний по вертикалі */
+    min-width: 40px; 
+    /* Відстань від цифри до тексту */
+    margin-right: 10px; 
+}
+
+/* Посилання */
+.bible-link {
+    color: blue !important;
+
+}
+
+/* Тултіп (залишаємо ваш великий розмір) */
+.bible-tooltip {
+    background-color: #ffffff;
+    border: 1px solid #2F4F4F; 
+    padding: 15px;
+    font-size: 20px;
+    color: #2c3e50;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    line-height: 1.5;
+    
+    width: 85vw;
+    max-width: 650px;
+    box-sizing: border-box;
+    word-wrap: break-word;
 }
