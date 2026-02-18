@@ -145,7 +145,6 @@ body {
     overflow-y: visible; /* Дозволяємо рости всередині контенту */
 }
 
-/* Кнопка видалення всередині закладки */
 /* Покращений хрестик видалення */
 .delete-tab {
     position: absolute;
@@ -155,8 +154,6 @@ body {
     color: #8b4513;
     opacity: 0.3;
     transition: opacity 0.2s, transform 0.2s;
-    writing-mode: horizontal-tb; /* Хрестик має бути рівним, не вертикальним */
-    transform: rotate(180deg);   /* Компенсуємо поворот самої закладки */
 }
 
 .delete-tab:hover {
