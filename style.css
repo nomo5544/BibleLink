@@ -110,17 +110,20 @@ body {
 
 /* МАСШТАБ ТЕКСТУ (ФОРСОВАНИЙ) */
 #textcontent {
-    font-size: 32px !important; /* Збільшив до 32px для десктопа */
+    /* 2.5rem означає, що текст буде у 2.5 рази більший за базовий (приблизно 50px) */
+    font-size: 2.5rem !important; 
     line-height: 1.7 !important;
     color: #2c3e50;
-    max-width: 1100px;
+    max-width: 1200px; /* Дозволяємо тексту займати більше місця */
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px;
     white-space: pre-wrap;
+    word-wrap: break-word; /* Щоб довгі слова не стискали шрифт */
 }
 
 /* Посилання */
 .bible-link {
+    font-size: 1em !important; /* Бере розмір від батьківського 2.5rem */
     color: blue !important;
     text-decoration: none !important;
     cursor: pointer !important;
