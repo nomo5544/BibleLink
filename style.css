@@ -55,15 +55,24 @@ body {
     box-shadow: -4px 4px 10px rgba(0,0,0,0.1);
 }
 
+/* --- СТИЛЬ КНОПКИ ДОДАТИ (Тепер це також закладка) --- */
 .add-tab-btn {
-    background: #8b4513;
-    color: white;
-    border: none;
+    background: #a67c52; /* Темніший картон */
+    color: #f0e6d2;
+    border: 1px solid #8b4513;
+    border-right: none;
     border-radius: 8px 0 0 8px;
-    padding: 10px;
+    padding: 15px 5px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
+    transition: all 0.2s;
+    width: 100%; /* Щоб була такої ж ширини, як інші */
+}
+
+.add-tab-btn:hover {
+    background: #8b4513;
+    padding-left: 12px;
 }
 
 /* --- Основна сторінка (Аркуш) --- */
@@ -78,16 +87,15 @@ body {
     box-sizing: border-box;
 }
 
-/* --- Стилі основного тексту на аркуші --- */
+/* --- МАСШТАБ ТЕКСТУ (Збільшено для десктопа) --- */
 #textcontent {
-    font-size: 26px; /* Базовий розмір шрифту */
-    line-height: 1.6; /* Масштабування міжрядкового інтервалу */
+    font-size: 30px;         /* Значно більший шрифт */
+    line-height: 1.7;        /* Ваш масштаб 1.7 */
     color: #2c3e50;
-    max-width: 950px; /* Ширина текстового блоку */
+    max-width: 1000px;       /* Розширили для десктопа */
     margin: 0 auto;
-    padding: 20px;
-    padding-bottom: 50px;
-    white-space: pre-wrap; /* Щоб зберігалися абзаци */
+    padding: 40px;
+    white-space: pre-wrap;
 }
 
 /* Синій колір без підкреслення */
@@ -145,28 +153,33 @@ body {
     overflow-y: visible; /* Дозволяємо рости всередині контенту */
 }
 
-/* Покращений хрестик видалення */
+/* --- СТИЛЬ ХРЕСТИКА (Мінімалізм) --- */
 .delete-tab {
     position: absolute;
-    top: 5px;   /* Завжди зверху закладки */
-    right: 5px; /* Центруємо по ширині */
-    font-size: 14px;
+    top: 2px;
+    right: 2px;
+    font-size: 12px;
     color: #8b4513;
-    opacity: 0.3;
-    transition: opacity 0.2s, transform 0.2s;
+    opacity: 0; /* Прихований за замовчуванням */
+    transition: opacity 0.2s;
+    writing-mode: horizontal-tb;
+    transform: rotate(180deg);
+}
+
+.side-tab:hover .delete-tab {
+    opacity: 0.6; /* З'являється тільки при наведенні на закладку */
 }
 
 .delete-tab:hover {
-    opacity: 1;
+    opacity: 1 !important;
     color: #e74c3c;
-    transform: rotate(180deg) scale(1.2);
 }
 
 /* Додамо стиль для контейнера кнопок у модалці */
 .modal-buttons {
     display: flex;
     justify-content: flex-end;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 #pageTitle {
     width: 100%;
@@ -184,5 +197,6 @@ button {
     font-weight: bold;
 }
 
-.save-btn { background: #2ecc71; color: white; }
-.cancel-btn { background: #e74c3c; color: white; margin-left: 10px; }
+/* Решта стилів кнопок модалки */
+.save-btn { background: #2ecc71; color: white; margin-right: 10px; }
+.cancel-btn { background: #e74c3c; color: white; }}
