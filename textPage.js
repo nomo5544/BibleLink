@@ -1,3 +1,7 @@
+let bibleData = {};
+let tooltip = null;
+
+// Словник скорочень (переконайтеся, що він у вас є в коді або окремому файлі)
 const bookNameMap = {
     "Бут": "Буття", "Буття": "Буття",
     "Вих": "Вихід", "Вихід": "Вихід",
@@ -67,49 +71,53 @@ const bookNameMap = {
     "Об": "Об'явлення", "Об'яв": "Об'явлення", "Одкр": "Об'явлення", "Об'явлення": "Об'явлення"
 };
 
-let bibleData = {};
-let tooltip = null;
-
-// Завантаження бази
+// 1. Завантаження бази JSON
 fetch('bibleText.json')
     .then(response => response.json())
     .then(data => {
         bibleData = data;
-        render();
+        render(); // Викликаємо рендер після завантаження бази
     })
     .catch(err => console.error("Помилка завантаження JSON:", err));
 
+// 2. Функція рендеру (адаптована під PWA)
 function render() {
-    chrome.storage.local.get("copiedHtml", function (data) {
-        if (!data.copiedHtml) return;
+    // ЗАМІНА: Замість chrome.storage використовуємо localStorage
+    // Вчитель може просто вставити текст у поле (яке ми додамо) або ми беремо останній збережений
+    const savedHtml = localStorage.getItem("copiedHtml");
+    
+    if (!savedHtml) {
+        document.getElementById("textcontent").innerHTML = "<p>Будь ласка, вставте текст для аналізу...</p>";
+        return;
+    }
 
-        const container = document.getElementById("textcontent");
-        let html = data.copiedHtml;
+    const container = document.getElementById("textcontent");
+    let html = savedHtml;
 
-        // Очищаємо пробіли
-        html = html.replace(/&nbsp;/g, ' ').replace(/\u00a0/g, ' ');
+    // Очищаємо пробіли
+    html = html.replace(/&nbsp;/g, ' ').replace(/\u00a0/g, ' ');
 
-        // Покращений Regex
-        const bibleRegex = /(\d?\s?[А-Яа-яІЇЄҐ][а-яіїєґ']{0,15}\.?)\s*(\d+)(?:\s*[\:\.]\s*(\d+(?:\s*[,\-\–]\s*\d+)*))?/g;
+    // Ваш Regex залишається без змін
+    const bibleRegex = /(\d?\s?[А-Яа-яІЇЄҐ][а-яіїєґ']{0,15}\.?)\s*(\d+)(?:\s*[\:\.]\s*(\d+(?:\s*[,\-\–]\s*\d+)*))?/g;
 
-        const processedHtml = html.replace(bibleRegex, function (match, bookPart, chapter, versesStr) {
-            const cleanBookKey = bookPart.trim().replace(/\.$/, "");
-            const fullBookName = bookNameMap[cleanBookKey];
+    const processedHtml = html.replace(bibleRegex, function (match, bookPart, chapter, versesStr) {
+        const cleanBookKey = bookPart.trim().replace(/\.$/, "");
+        const fullBookName = bookNameMap[cleanBookKey];
 
-            if (!fullBookName) return match;
+        if (!fullBookName) return match;
 
-            return `<span class="bible-link" 
-                    data-book="${fullBookName}" 
-                    data-chapter="${chapter}" 
-                    data-verses="${versesStr || "1"}" 
-                    style="color: blue !important; cursor: pointer !important; ">${match}</span>`;
-        });
-
-        container.innerHTML = processedHtml;
-        setupEventListeners(container);
+        return `<span class="bible-link" 
+                data-book="${fullBookName}" 
+                data-chapter="${chapter}" 
+                data-verses="${versesStr || "1"}" 
+                style="color: blue !important; cursor: pointer !important; ">${match}</span>`;
     });
+
+    container.innerHTML = processedHtml;
+    setupEventListeners(container);
 }
 
+// 3. Ваші функції Tooltip (без змін, вони працюють у вебі ідеально)
 function setupEventListeners(container) {
     container.addEventListener('mouseover', (e) => {
         const link = e.target.closest('.bible-link');
@@ -177,4 +185,13 @@ function hideTooltip() {
         tooltip.remove();
         tooltip = null;
     }
+}
+
+// 4. Реєстрація Service Worker (для офлайн роботи)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('SW registered!', reg))
+            .catch(err => console.log('SW registration failed:', err));
+    });
 }
