@@ -1,8 +1,4 @@
 /* --- Загальні налаштування --- */
-/* --- МАСШТАБ ТЕКСТУ (Глобальне виправлення) --- */
-html {
-    font-size: 20px; /* Встановлюємо базу для всього документа */
-}
 body {
     margin: 0;
     padding: 0;
@@ -200,6 +196,9 @@ button {
     border: none;
     font-weight: bold;
 }
-
+/* --- МАСШТАБ ТЕКСТУ (Глобальне виправлення) --- */
+html {
+    font-size: 20px; /* Встановлюємо базу для всього документа */
+}
 .save-btn { background: #2ecc71; color: white; margin-right: 10px; }
 .cancel-btn { background: #e74c3c; color: white; }
