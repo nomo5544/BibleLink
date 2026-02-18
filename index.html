@@ -1,24 +1,34 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Text Folder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.webmanifest">
+</head>
 <body>
     <div class="folder-container">
-        <div id="side-tabs" class="tabs-container"></div>
+        <div id="side-tabs" class="tabs-container">
+            <button class="add-tab-btn" onclick="openAddDialog()" title="Додати нову сторінку">+</button>
+        </div>
 
         <main class="paper-page">
             <div id="textcontent">
-                <p>Натисніть "+", щоб додати ваш перший текст.</p>
+                <p>Оберіть закладку або додайте нову...</p>
             </div>
         </main>
     </div>
 
     <div id="addDialog" class="modal" style="display:none;">
         <div class="modal-content">
-            <input type="text" id="pageTitle" placeholder="Назва сторінки (напр. Урок 1)">
-            <div contenteditable="true" id="inputArea" placeholder="Вставте або напишіть текст тут..."></div>
-            <div class="modal-buttons">
-                <button class="save-btn" onclick="saveNewPage()">Зберегти</button>
-                <button class="cancel-btn" onclick="closeAddDialog()">Скасувати</button>
-            </div>
+            <input type="text" id="pageTitle" placeholder="Назва (напр. Урок 1)">
+            <div contenteditable="true" id="inputArea" placeholder="Вставте текст тут..."></div>
+            <button onclick="saveNewPage()">Зберегти в папку</button>
+            <button onclick="closeAddDialog()">Скасувати</button>
         </div>
     </div>
 
     <script src="textPage.js"></script>
 </body>
+</html>
