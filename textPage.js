@@ -1,8 +1,8 @@
+
+// Ініціалізація даних
 let bibleData = {};
 let tooltip = null;
 let currentPageIndex = null;
-
-// Отримуємо збережені сторінки або створюємо порожній масив, якщо їх ще немає
 let pages = JSON.parse(localStorage.getItem("bible_pages")) || [];
 
 // Словник скорочень (переконайтеся, що він у вас є в коді або окремому файлі)
@@ -75,84 +75,61 @@ const bookNameMap = {
     "Об": "Об'явлення", "Об'яв": "Об'явлення", "Одкр": "Об'явлення", "Об'явлення": "Об'явлення"
 };
 
-// 1. Завантаження бази JSON
+// 1. Завантаження бази
 fetch('bibleText.json')
-    .then(response => response.json())
+    .then(r => r.json())
     .then(data => {
         bibleData = data;
-        renderTabs(); // Спочатку малюємо закладки
-        if (pages.length > 0) loadPage(0); // Завантажуємо першу сторінку, якщо вона є
+        renderTabs();
+        if (pages.length > 0) loadPage(0);
     })
-    .catch(err => console.error("Помилка завантаження JSON:", err));
+    .catch(err => console.error("Помилка завантаження бази:", err));
 
-// --- Керування сторінками (Закладки) ---
-
+// 2. Рендер закладок
 function renderTabs() {
-    const tabsContainer = document.getElementById("side-tabs");
-    if (!tabsContainer) return;
+    const container = document.getElementById("side-tabs");
+    if (!container) return;
 
-    const addBtn = `<button class="add-tab-btn" onclick="openAddDialog()" title="Додати нову сторінку">+</button>`;
-    
-    let tabsHtml = pages.map((page, index) => `
+    const tabsHtml = pages.map((page, index) => `
         <div class="side-tab ${currentPageIndex === index ? 'active' : ''}" onclick="loadPage(${index})">
             <span class="delete-tab" onclick="deletePage(event, ${index})">✕</span>
             ${page.title}
         </div>
     `).join('');
 
-    tabsContainer.innerHTML = tabsHtml + addBtn;
+    const addBtn = `<button class="add-tab-btn" onclick="openAddDialog()">+</button>`;
+    container.innerHTML = tabsHtml + addBtn;
 }
 
+// 3. Завантаження конкретної сторінки
 function loadPage(index) {
     currentPageIndex = index;
     const page = pages[index];
-    const container = document.getElementById("textcontent");
+    const contentDiv = document.getElementById("textcontent");
     
-    if (page) {
-        container.innerHTML = processText(page.content);
-        setupEventListeners(container);
+    if (page && contentDiv) {
+        contentDiv.innerHTML = processText(page.content);
+        setupEventListeners(contentDiv);
     }
     renderTabs();
 }
 
-function deletePage(event, index) {
-    event.stopPropagation(); // Щоб не спрацював клік по самій закладці
-    if (confirm(`Видалити сторінку "${pages[index].title}"?`)) {
-        pages.splice(index, 1); // Видаляємо з масиву
-        localStorage.setItem("bible_pages", JSON.stringify(pages)); // Оновлюємо сховище
-        
-        if (currentPageIndex === index) {
-            currentPageIndex = null;
-            document.getElementById("textcontent").innerHTML = "<p>Оберіть закладку...</p>";
-        } else if (currentPageIndex > index) {
-            currentPageIndex--; // Зсуваємо індекс активної сторінки
-        }
-        
-        renderTabs();
-    }
-}
-
+// 4. Обробка тексту (Regex)
 function processText(html) {
     if (!html) return "";
-    let processed = html.replace(/&nbsp;/g, ' ').replace(/\u00a0/g, ' ');
-    
-    const bibleRegex = /(\d?\s?[А-Яа-яІЇЄҐ][а-яіїєґ']{0,15}\.?)\s*(\d+)(?:\s*[\:\.]\s*(\d+(?:\s*[,\-\–]\s*\d+)*))?/g;
+    let txt = html.replace(/&nbsp;/g, ' ').replace(/\u00a0/g, ' ');
+    const regex = /(\d?\s?[А-Яа-яІЇЄҐ][а-яіїєґ']{0,15}\.?)\s*(\d+)(?:\s*[\:\.]\s*(\d+(?:\s*[,\-\–]\s*\d+)*))?/g;
 
-    return processed.replace(bibleRegex, function (match, bookPart, chapter, versesStr) {
-        const cleanBookKey = bookPart.trim().replace(/\.$/, "");
-        const fullBookName = bookNameMap[cleanBookKey];
-        if (!fullBookName) return match;
+    return txt.replace(regex, function(match, book, ch, vs) {
+        const cleanBook = book.trim().replace(/\.$/, "");
+        const fullBook = bookNameMap[cleanBook];
+        if (!fullBook) return match;
 
-        return `<span class="bible-link" 
-                data-book="${fullBookName}" 
-                data-chapter="${chapter}" 
-                data-verses="${versesStr || "1"}" 
-                style="color: blue !important; cursor: pointer !important;">${match}</span>`;
+        return `<span class="bible-link" data-book="${fullBook}" data-chapter="${ch}" data-verses="${vs || '1'}">${match}</span>`;
     });
 }
 
-// --- Діалогове вікно (Модалка) ---
-
+// 5. Модальне вікно
 function openAddDialog() {
     document.getElementById("addDialog").style.display = "flex";
 }
@@ -163,59 +140,58 @@ function closeAddDialog() {
     document.getElementById("inputArea").innerHTML = "";
 }
 
-// Також оновимо saveNewPage, щоб вона автоматично фокусувалася на новій сторінці
 function saveNewPage() {
-    const titleInput = document.getElementById("pageTitle");
-    const contentInput = document.getElementById("inputArea");
-    
-    const title = titleInput.value.trim() || "Без назви";
-    const content = contentInput.innerHTML;
-    
+    const title = document.getElementById("pageTitle").value.trim() || "Без назви";
+    const content = document.getElementById("inputArea").innerHTML;
+
     if (content.trim() === "" || content === "<br>") {
-        alert("Текст порожній!");
+        alert("Введіть текст!");
         return;
     }
 
     pages.push({ title, content });
     localStorage.setItem("bible_pages", JSON.stringify(pages));
-    
     closeAddDialog();
-    renderTabs();
     loadPage(pages.length - 1);
 }
 
-// --- Функції Tooltip (Ваш оригінальний код) ---
+function deletePage(e, index) {
+    e.stopPropagation();
+    if (confirm("Видалити цю сторінку?")) {
+        pages.splice(index, 1);
+        localStorage.setItem("bible_pages", JSON.stringify(pages));
+        if (currentPageIndex === index) currentPageIndex = null;
+        location.reload(); // Найнадійніший спосіб оновити стан
+    }
+}
 
+// 6. Tooltips та Події
 function setupEventListeners(container) {
     container.addEventListener('mouseover', (e) => {
         const link = e.target.closest('.bible-link');
         if (link) {
-            const book = link.getAttribute('data-book');
-            const chapter = link.getAttribute('data-chapter');
-            const versesStr = link.getAttribute('data-verses');
-            const combinedText = getCombinedText(book, chapter, versesStr);
+            const combinedText = getCombinedText(
+                link.dataset.book, 
+                link.dataset.chapter, 
+                link.dataset.verses
+            );
             if (combinedText) showTooltip(e, combinedText);
         }
     });
-
     container.addEventListener('mousemove', (e) => {
         if (tooltip) {
             tooltip.style.left = (e.pageX + 15) + 'px';
             tooltip.style.top = (e.pageY + 15) + 'px';
         }
     });
-
     container.addEventListener('mouseout', (e) => {
-        if (e.target.closest('.bible-link')) {
-            hideTooltip();
-        }
+        if (e.target.closest('.bible-link')) hideTooltip();
     });
 }
 
 function getCombinedText(book, chapter, versesStr) {
     const verseNumbers = versesStr.match(/\d+/g);
     if (!verseNumbers) return null;
-
     let result = [];
     if (versesStr.includes('-') || versesStr.includes('–')) {
         const start = parseInt(verseNumbers[0]);
@@ -236,30 +212,17 @@ function getCombinedText(book, chapter, versesStr) {
 function showTooltip(event, text) {
     hideTooltip();
     tooltip = document.createElement('div');
-    tooltip.style.cssText = `
-        position: absolute; background: #ffffff; border: 1px solid #8b4513; 
-        padding: 15px; z-index: 10000; font-size: 22px; max-width: 550px; 
-        border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
-        color: #2c3e50; line-height: 1.5; pointer-events: none;
-    `;
+    tooltip.className = "bible-tooltip"; // Краще стилізувати в CSS
+    tooltip.style.cssText = `position: absolute; background: white; border: 1px solid #8b4513; padding: 15px; z-index: 10000; font-size: 20px; max-width: 500px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); pointer-events: none;`;
     tooltip.innerHTML = text;
     document.body.appendChild(tooltip);
-    tooltip.style.left = (event.pageX + 15) + 'px';
-    tooltip.style.top = (event.pageY + 15) + 'px';
 }
 
 function hideTooltip() {
-    if (tooltip) {
-        tooltip.remove();
-        tooltip = null;
-    }
+    if (tooltip) { tooltip.remove(); tooltip = null; }
 }
 
-// 4. Реєстрація Service Worker
+// 7. Service Worker
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('SW registered!'))
-            .catch(err => console.log('SW registration failed:', err));
-    });
+    navigator.serviceWorker.register('sw.js').catch(err => console.error(err));
 }
