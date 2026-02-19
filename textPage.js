@@ -149,14 +149,19 @@ function saveNewPage() {
     let title = document.getElementById('pageTitle').value.trim();
     const content = document.getElementById('inputArea').innerHTML;
 
-    // ПУНКТ 2: Якщо назва порожня, ставимо "Урок" + номер
+    // 1. Автоматична назва (Пункт 2 з минулого запиту)
     if (!title) {
-        // Припускаємо, що pages — це ваш масив зі сторінками
         title = "Урок " + (pages.length + 1);
     }
 
-    // Далі ваш існуючий код збереження...
+    // 2. Додаємо в масив
     pages.push({ title: title, content: content });
+
+    // 3. ГОЛОВНЕ: Зберігаємо в пам'ять браузера
+    // Перевірте, як саме називається ваш ключ (зазвичай 'bible_pages' або 'pages')
+    localStorage.setItem('bible_pages', JSON.stringify(pages));
+
+    // 4. Оновлюємо інтерфейс
     renderTabs();
     closeAddDialog();
 }
