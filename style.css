@@ -96,10 +96,6 @@ body {
     opacity: 1;
 }
 
-.side-tab:hover .delete-tab {
-    opacity: 0.6;
-}
-
 /* --- Основна сторінка --- */
 .paper-page {
     background: white;
@@ -197,6 +193,28 @@ body {
     margin-bottom: 15px;
     flex-shrink: 0;          /* Забороняємо заголовку стискатися */
 }
+/* Стиль посилань як у розширенні */
+.bible-link {
+    color: #0000EE;
+    text-decoration: underline;
+    cursor: pointer;
+}
 
+/* Статичний вигляд тултіпа для великих текстів */
+.bible-tooltip {
+    position: absolute;
+    background: white;
+    border: 1px solid #8b4513;
+    padding: 15px;
+    z-index: 10000;
+    font-size: 20px; /* Оптимально для читання */
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    color: #2c3e50;
+    line-height: 1.6;
+    pointer-events: none;
+    word-wrap: break-word;
+}
 .save-btn { background: #2ecc71; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer; }
 .cancel-btn { background: #e74c3c; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer; }
