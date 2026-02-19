@@ -131,7 +131,7 @@ function processText(html) {
                 data-book="${fullBook}" 
                 data-chapter="${ch}" 
                 data-verses="${vs || '1'}"
-                style="color: blue !important; cursor: pointer !important; text-decoration: underline;">${match}</span>`;
+                style="color: blue !important; cursor: pointer !important;">${match}</span>`;
     });
 }
 
