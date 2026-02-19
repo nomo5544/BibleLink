@@ -105,7 +105,7 @@ body {
 
 /* --- МАСШТАБ (Тільки шрифт) --- */
 #textcontent, #textcontent * {
-    font-size: 20px !important; 
+    font-size: 24px !important; 
     line-height: 1.6 !important;
     color: #2c3e50;
 }
