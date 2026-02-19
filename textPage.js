@@ -248,40 +248,40 @@ function showTooltip(event, text) {
     }
 
     tooltip.innerHTML = text;
-    tooltip.style.display = 'block';
-
-    // Отримуємо координати посилання
+    
+    // Координати (залишаємо вашу логіку)
     const rect = event.target.getBoundingClientRect();
-    
-    // Розрахунок позиції (над посиланням)
     let left = rect.left + window.scrollX;
-    let top = rect.top + window.scrollY - tooltip.offsetHeight - 10;
+    let top = rect.top + window.scrollY - 10; // Тимчасова точка
 
-    // ПЕРЕВІРКА МЕЖ ЕКРАНУ (щоб не ховалося)
-    
-    // Вправо
+    // Встановлюємо позицію ПЕРЕД додаванням класу show
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
+
+    // ПЕРЕВІРКА МЕЖ ЕКРАНУ (ваша логіка...)
     if (left + tooltip.offsetWidth > window.innerWidth) {
         left = window.innerWidth - tooltip.offsetWidth - 20;
     }
-    
-    // Вліво
     if (left < 10) left = 10;
-
-    // Вгору (якщо над посиланням немає місця — показуємо під ним)
     if (rect.top < tooltip.offsetHeight + 20) {
         top = rect.bottom + window.scrollY + 10;
+    } else {
+        top = rect.top + window.scrollY - tooltip.offsetHeight - 10;
     }
 
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
+
+    // Вмикаємо плавну появу
+    setTimeout(() => {
+        tooltip.classList.add('show');
+    }, 10);
 }
 
 function hideTooltip() {
-    // Шукаємо елемент в документі за його ID
     const tooltip = document.getElementById('bible-tooltip');
     if (tooltip) {
-        tooltip.style.display = 'none'; // Просто ховаємо його
-        // Або tooltip.remove(); якщо хочете видаляти повністю
+        tooltip.classList.remove('show');
     }
 }
 
