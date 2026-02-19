@@ -66,23 +66,28 @@ body {
     justify-content: center;
     align-items: center;
 }
-/* 1. Хрестик зверху по центру назви */
+/* --- Хрестик видалення (Винесений за межі) --- */
 .delete-tab {
     position: absolute;
-    /* Оскільки закладка розгорнута на 180 градусів: */
-    bottom: 5px;            /* Фактично це верх закладки */
+    /* Виносимо за межі контейнера */
+    bottom: -25px;          /* Оскільки закладка перевернута, це висуває його "вгору" над назвою */
     left: 50%;
     transform: translateX(-50%) rotate(180deg); 
-    font-size: 14px;
-    color: #8b4513;
+    
+    font-size: 16px;
+    font-weight: bold;
+    color: #e74c3c;         /* Зробив червоним, щоб було видно на фоні папки */
     opacity: 0;
-    transition: opacity 0.2s;
-    writing-mode: horizontal-tb; /* Текст хрестика горизонтальний */
-    z-index: 5;
+    transition: all 0.2s ease;
+    writing-mode: horizontal-tb;
+    cursor: pointer;
+    z-index: 100;
 }
 
+/* Показуємо хрестик при наведенні на закладку */
 .side-tab:hover .delete-tab {
-    opacity: 0.8;
+    opacity: 1;
+    bottom: -30px;          /* Легкий ефект випливання */
 }
 
 .side-tab:hover .delete-tab {
