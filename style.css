@@ -216,7 +216,8 @@ body {
     pointer-events: none;
     opacity: 0; 
     transition: opacity 0.3s ease-in-out;
-} /* ОСЬ ЦІЄЇ ДУЖКИ НЕ ВИСТАЧАЛО */
+    box-sizing: border-box;
+}
 
 .bible-tooltip.show {
     opacity: 1;
