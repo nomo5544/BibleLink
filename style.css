@@ -96,7 +96,7 @@ body {
     background: white;
     flex: 1;
     margin-left: 0;
-    padding: 60px 40px 60px 100px; /* Збільшено зліва, щоб закладки не закривали текст */
+    padding: 50px 40px 50px 80px; /* Збільшено зліва, щоб закладки не закривали текст */
     box-shadow: -5px 0 15px rgba(0,0,0,0.1);
     min-height: 100vh;
     box-sizing: border-box;
