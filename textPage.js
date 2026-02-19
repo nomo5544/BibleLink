@@ -74,11 +74,13 @@ const bookNameMap = {
         "об": "Об'явлення", "об'яв": "Об'явлення", "об'явл": "Об'явлення", "одкр": "Об'явлення", "об'явлення": "Об'явлення"
 };
 
+renderTabs();
+
 fetch('bibleText.json')
     .then(r => r.json())
     .then(data => {
         bibleData = data;
-        renderTabs();
+        
         if (pages.length > 0) loadPage(0);
     })
     .catch(err => console.error("Помилка завантаження бази:", err));
