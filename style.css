@@ -20,8 +20,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    z-index: 10;
-    width: 50px; /* Повернуто 50px для стабільності закладок */
+    z-index: 100; /* Піднімаємо вище за все */
+    width: 50px;
+    pointer-events: auto; /* Дозволяємо кліки */
 }
 
 .side-tab {
@@ -58,9 +59,14 @@ body {
     padding: 15px 5px;
     cursor: pointer;
     font-size: 24px;
+    font-weight: bold;
     width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 101;
+    pointer-events: all; /* Гарантуємо реакцію на клік */
 }
-
 /* --- Хрестик видалення --- */
 .delete-tab {
     position: absolute;
