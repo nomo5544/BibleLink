@@ -116,6 +116,12 @@ body {
     word-wrap: break-word;
 }
 
+/* Окремо для посилань всередині тексту */
+#textcontent .bible-link {
+    color: blue !important;
+    text-decoration: none !important;
+}
+
 #textcontent, #textcontent * {
     font-size: 24px !important; 
     line-height: 1.6 !important;
