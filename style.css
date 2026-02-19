@@ -53,17 +53,16 @@ body {
     z-index: 11;
 }
 
-/* 4. Кнопка "+" — закруглення кутів на протилежні */
+/* 4. Кнопка "+" */
 .add-tab-btn {
     background: #fff;
+    width: 25px;
+    padding: 25px 5px 15px 5px;
     color: #000;
     border: 1px solid #8b4513;
-    /* Було 8px 0 0 8px (ліворуч), тепер 0 8px 8px 0 (праворуч) */
     border-radius: 0 8px 8px 0; 
-    padding: 25px 5px 15px 5px;
     cursor: pointer;
     font-size: 24px;
-    width: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,7 +91,6 @@ body {
 /* Показуємо хрестик при наведенні на закладку */
 .side-tab:hover .delete-tab {
     opacity: 1;
-              /* bottom: -30px; Легкий ефект випливання */
 }
 
 .side-tab:hover .delete-tab {
