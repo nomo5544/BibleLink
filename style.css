@@ -27,8 +27,9 @@ body {
 
 .side-tab {
     position: relative;
-    background: #d2b48c;
-    padding: 30px 8px 15px 8px;
+    background: #F7E7CE;
+    width: 40px;   /* ШИРИНА закладки (було 50px) */
+    padding: 25px 5px 15px 5px;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: rotate(180deg);
@@ -61,7 +62,7 @@ body {
     padding: 15px 5px;
     cursor: pointer;
     font-size: 24px;
-    width: 50px;
+    width: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
