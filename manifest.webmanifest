@@ -1,7 +1,7 @@
 {
   "short_name": "BiblePreview",
   "name": "Bible Text Preview for Teachers",
-  "description": "Інструмент для роботи з біблійними текстами та концепцією вільного вибору.",
+  "description": "Підсвічування Біблійних текстів у конспекті.",
   "icons": [
     {
       "src": "icon-192.png",
