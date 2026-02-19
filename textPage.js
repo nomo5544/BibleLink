@@ -112,23 +112,23 @@ function loadPage(index) {
 
 function processText(html) {
     if (!html) return "";
-    
-    // Очищення пробілів (з вашого розширення)
+
+    // 1. Очищення пробілів (як у вашому розширенні)
     let cleanHtml = html.replace(/&nbsp;/g, ' ').replace(/[\u00a0\u1680\u2000-\u200a\u202f\u205f\u3000]/g, ' ');
 
-    // 1. Створюємо мапу для пошуку (чутливу до регістру та крапок)
+    // 2. Створення гнучкої карти (flexibleMap)
     const flexibleMap = {};
     for (let key in bookNameMap) {
         const normKey = key.toLowerCase().replace(/\s+/g, '').replace(/\.$/, "");
         flexibleMap[normKey] = bookNameMap[key];
     }
 
-    // 2. Створюємо динамічний регулярний вираз на основі ключів словника
+    // 3. Динамічний Regex (саме він у розширенні працює краще)
     const sortedKeys = Object.keys(bookNameMap).sort((a, b) => b.length - a.length);
     const booksPattern = sortedKeys.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
     const bibleRegex = new RegExp(`(${booksPattern})\\s+(\\d+)(?:[\\:\\.]\\s*(\\d+(?:(?:\\s*[\\-\\–]\\s*)\\d+)*))?`, 'gi');
 
-    // 3. Заміна тексту на посилання
+    // 4. Заміна (чистий код без примусових стилів, все через CSS)
     return cleanHtml.replace(bibleRegex, function (fullMatch, bookPart, chapter, versesStr) {
         const cleanBookKey = bookPart.trim().toLowerCase().replace(/\s+/g, '').replace(/\.$/, "");
         const fullBookName = flexibleMap[cleanBookKey];
@@ -136,13 +136,7 @@ function processText(html) {
         if (!fullBookName) return fullMatch;
 
         let cleanVerses = versesStr || "1";
-        
-        // Повертаємо посилання
-        return `<span class="bible-link" 
-                data-book="${fullBookName}" 
-                data-chapter="${chapter}" 
-                data-verses="${cleanVerses}" 
-                style="color: blue; cursor: pointer; text-decoration: underline;">${fullMatch}</span>`;
+        return `<span class="bible-link" data-book="${fullBookName}" data-chapter="${chapter}" data-verses="${cleanVerses}">${fullMatch}</span>`;
     });
 }
 
