@@ -69,20 +69,22 @@ body {
 /* --- Хрестик видалення (Винесений за межі) --- */
 .delete-tab {
     position: absolute;
-    /* Виносимо "вгору" (через rotate це bottom) */
-    bottom: -5px; 
-    /* Прив'язка до кута (через rotate це праворуч) */
-    left: -25px; 
+    /* Центруємо по висоті закладинки */
+    top: 50%;
+    /* Виносимо за межі (ліворуч у коді, що стає праворуч після rotate) */
+    left: -30px; 
+    
+    /* Корекція положення: піднімаємо на половину власної висоти */
+    transform: translateY(-50%) rotate(180deg);
     
     font-size: 18px;
     font-weight: bold;
     color: #e74c3c;
     opacity: 0;
-    transition: all 0.2s ease;
+    transition: opacity 0.2s ease;
     writing-mode: horizontal-tb;
-    transform: rotate(180deg); /* Щоб хрестик був рівним */
     cursor: pointer;
-    padding: 5px;
+    z-index: 100;
 }
 
 /* Показуємо хрестик при наведенні на закладку */
