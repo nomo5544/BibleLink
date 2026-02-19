@@ -70,9 +70,9 @@ body {
 .delete-tab {
     position: absolute;
     /* Виносимо "вгору" (через rotate це bottom) */
-    bottom: -35px; 
+    bottom: 0px; 
     /* Прив'язка до кута (через rotate це праворуч) */
-    left: -15px; 
+    left: -25px; 
     
     font-size: 18px;
     font-weight: bold;
