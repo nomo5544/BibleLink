@@ -51,33 +51,38 @@ body {
     z-index: 11;
 }
 
+/* 4. Кнопка "+" — закруглення кутів на протилежні */
 .add-tab-btn {
     background: #a67c52;
     color: #f0e6d2;
     border: 1px solid #8b4513;
-    border-radius: 8px 0 0 8px;
+    /* Було 8px 0 0 8px (ліворуч), тепер 0 8px 8px 0 (праворуч) */
+    border-radius: 0 8px 8px 0; 
     padding: 15px 5px;
     cursor: pointer;
     font-size: 24px;
-    font-weight: bold;
     width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 101;
-    pointer-events: all; /* Гарантуємо реакцію на клік */
 }
-/* --- Хрестик видалення --- */
+/* 1. Хрестик зверху по центру назви */
 .delete-tab {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    /* Оскільки закладка розгорнута на 180 градусів: */
+    bottom: 5px;            /* Фактично це верх закладки */
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg); 
     font-size: 14px;
     color: #8b4513;
     opacity: 0;
     transition: opacity 0.2s;
-    writing-mode: horizontal-tb;
-    transform: rotate(180deg);
+    writing-mode: horizontal-tb; /* Текст хрестика горизонтальний */
+    z-index: 5;
+}
+
+.side-tab:hover .delete-tab {
+    opacity: 0.8;
 }
 
 .side-tab:hover .delete-tab {
