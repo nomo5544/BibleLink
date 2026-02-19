@@ -126,7 +126,7 @@ function processText(html) {
     // 3. Динамічний Regex (саме він у розширенні працює краще)
     const sortedKeys = Object.keys(bookNameMap).sort((a, b) => b.length - a.length);
     const booksPattern = sortedKeys.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
-    const bibleRegex = new RegExp(`(${booksPattern})\\s+(\\d+)(?:[\\:\\.]\\s*(\\d+(?:(?:\\s*[\\-\\–]\\s*)\\d+)*))?`, 'gi');
+    const bibleRegex = new RegExp(`(${booksPattern})\\.?\\s+(\\d+)(?:[\\:\\.]\\s*(\\d+(?:(?:\\s*[\\-\\–]\\s*)\\d+)*))?`, 'gi');
 
     // 4. Заміна (чистий код без примусових стилів, все через CSS)
     return cleanHtml.replace(bibleRegex, function (fullMatch, bookPart, chapter, versesStr) {
