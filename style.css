@@ -59,8 +59,8 @@ body {
 /* 4. Кнопка "+" */
 .add-tab-btn {
     background: #fff;
-    width: 30px;
-    padding: 25px 5px;
+    width: 22px;
+    padding: 30px 5px;
     color: #000;
     border: 1px solid #8b4513;
     border-radius: 0 8px 8px 0; 
