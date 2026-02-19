@@ -207,19 +207,18 @@ body {
 
 /* Статичний вигляд тултіпа для великих текстів */
 .bible-tooltip {
-    background-color: #ffffff;
-    border: 1px solid #2F4F4F; 
+    position: absolute;
+    z-index: 2000;
+    background: #fff;
+    border: 1px solid #8b4513;
     padding: 15px;
-    font-size: 20px;
-    color: #2c3e50;
     border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    line-height: 1.5;
-    
-    width: 85vw;
-    max-width: 650px;
-    box-sizing: border-box;
-    word-wrap: break-word;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    max-width: 500px;
+    max-height: 900px;
+    font-size: 19px;
+    line-height: 1.4;
+    pointer-events: none;
     
     /* ПЛАВНІСТЬ */
     opacity: 0; 
