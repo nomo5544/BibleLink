@@ -129,7 +129,14 @@ function processText(html) {
 }
 
 function openAddDialog() {
-    document.getElementById("addDialog").style.display = "flex";
+    document.getElementById('addDialog').style.display = 'flex';
+    document.getElementById('pageTitle').value = ''; // Очистити назву
+    document.getElementById('inputArea').innerHTML = ''; // Очистити текст
+    
+    // ПУНКТ 3: Фокус на полі вводу тексту при відкритті
+    setTimeout(() => {
+        document.getElementById('inputArea').focus();
+    }, 100);
 }
 
 function closeAddDialog() {
@@ -139,18 +146,19 @@ function closeAddDialog() {
 }
 
 function saveNewPage() {
-    const title = document.getElementById("pageTitle").value.trim() || "Без назви";
-    const content = document.getElementById("inputArea").innerHTML;
+    let title = document.getElementById('pageTitle').value.trim();
+    const content = document.getElementById('inputArea').innerHTML;
 
-    if (content.trim() === "" || content === "<br>") {
-        alert("Введіть текст!");
-        return;
+    // ПУНКТ 2: Якщо назва порожня, ставимо "Урок" + номер
+    if (!title) {
+        // Припускаємо, що pages — це ваш масив зі сторінками
+        title = "Урок " + (pages.length + 1);
     }
 
-    pages.push({ title, content });
-    localStorage.setItem("bible_pages", JSON.stringify(pages));
+    // Далі ваш існуючий код збереження...
+    pages.push({ title: title, content: content });
+    renderTabs();
     closeAddDialog();
-    loadPage(pages.length - 1);
 }
 
 function deletePage(e, index) {
