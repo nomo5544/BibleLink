@@ -196,7 +196,6 @@ body {
 /* Стиль посилань як у розширенні */
 .bible-link {
     color: #0000EE;
-    text-decoration: underline;
     cursor: pointer;
 }
 
