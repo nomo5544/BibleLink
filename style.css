@@ -223,10 +223,13 @@ body {
 }
 
 /* Номер вірша всередині спливаючого вікна */
-.verse-num {
-    font-size: 0.5em;      /* Розмір цифри (менше основного тексту) */
-    color: #8b4513;        /* Коричневий колір */
-    margin-right: 4px;     /* Відступ від цифри до тексту */
+.bible-tooltip .verse-num {
+    font-size: 14px !important;    /* ТУТ задайте точний розмір у пікселях (наприклад, 14) */
+    font-weight: normal !important; /* ПРИМУСОВО прибираємо жирність */
+    color: #8b4513 !important;      /* Коричневий колір */
+    margin-right: 6px !important;
+    display: inline-block;
+    vertical-align: baseline;
 }
     
     /* ПЛАВНІСТЬ */
