@@ -231,7 +231,7 @@ function getCombinedText(book, chapter, versesStr) {
     } else {
         verseNumbers.forEach(v => {
             const ref = `${book} ${chapter}:${v}`;
-            if (bibleData[ref]) result.push(`<b>${v}</b> ${bibleData[ref]}`);
+            if (bibleData[ref]) result.push(`<bclass="verse-num">${v}</b> ${bibleData[ref]}`);
         });
     }
     return result.length > 0 ? result.join('<br>') : null;
