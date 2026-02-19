@@ -90,7 +90,7 @@ body {
 /* Показуємо хрестик при наведенні на закладку */
 .side-tab:hover .delete-tab {
     opacity: 1;
-    bottom: -30px;          /* Легкий ефект випливання */
+              /* bottom: -30px; Легкий ефект випливання */
 }
 
 .side-tab:hover .delete-tab {
