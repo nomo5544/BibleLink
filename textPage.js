@@ -252,3 +252,23 @@ function hideTooltip() {
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(err => console.error(err));
 }
+// Додаємо обробку Enter для поля назви та основного тексту
+document.getElementById('pageTitle').addEventListener('keydown', handleEnterSave);
+document.getElementById('inputArea').addEventListener('keydown', handleEnterSave);
+
+function handleEnterSave(event) {
+    // Перевіряємо, чи натиснуто Enter
+    // Якщо ми в inputArea, то Enter зазвичай робить новий рядок, 
+    // тому для збереження краще використовувати Ctrl + Enter
+    if (event.key === 'Enter') {
+        if (event.target.id === 'pageTitle') {
+            // В назві Enter відразу зберігає
+            event.preventDefault();
+            saveNewPage();
+        } else if (event.ctrlKey) {
+            // В основному тексті Ctrl + Enter зберігає (щоб звичайний Enter працював як перенос рядка)
+            event.preventDefault();
+            saveNewPage();
+        }
+    }
+}
