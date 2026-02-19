@@ -28,7 +28,7 @@ body {
 .side-tab {
     position: relative;
     background: #F7E7CE;
-    width: 40px;   /* ШИРИНА закладки (було 50px) */
+    width: 30px;   /* ШИРИНА закладки (було 50px) */
     padding: 25px 5px 15px 5px;
     writing-mode: vertical-rl;
     text-orientation: mixed;
@@ -44,6 +44,7 @@ body {
 
 .side-tab.active {
     background: #fff;
+    width: 30px;
     color: #000;
     margin-right: -15px;
     padding-left: 15px; 
