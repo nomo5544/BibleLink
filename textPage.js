@@ -277,9 +277,11 @@ function showTooltip(event, text) {
 }
 
 function hideTooltip() {
+    // Шукаємо елемент в документі за його ID
+    const tooltip = document.getElementById('bible-tooltip');
     if (tooltip) {
-        tooltip.remove();
-        tooltip = null;
+        tooltip.style.display = 'none'; // Просто ховаємо його
+        // Або tooltip.remove(); якщо хочете видаляти повністю
     }
 }
 
