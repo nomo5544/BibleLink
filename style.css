@@ -54,8 +54,8 @@ body {
 
 /* 4. Кнопка "+" — закруглення кутів на протилежні */
 .add-tab-btn {
-    background: #a67c52;
-    color: #F7E7CE;
+    background: #fff;
+    color: #000;
     border: 1px solid #8b4513;
     /* Було 8px 0 0 8px (ліворуч), тепер 0 8px 8px 0 (праворуч) */
     border-radius: 0 8px 8px 0; 
