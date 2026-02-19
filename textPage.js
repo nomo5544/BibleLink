@@ -226,12 +226,14 @@ function getCombinedText(book, chapter, versesStr) {
         const end = parseInt(verseNumbers[verseNumbers.length - 1]);
         for (let i = start; i <= end; i++) {
             const ref = `${book} ${chapter}:${i}`;
-            if (bibleData[ref]) result.push(`<b>${i}</b> ${bibleData[ref]}`);
+            // ЗАМІНЕНО: прибрано <b>, залишено тільки span
+            if (bibleData[ref]) result.push(`<span class="verse-num">${i}</span> ${bibleData[ref]}`);
         }
     } else {
         verseNumbers.forEach(v => {
             const ref = `${book} ${chapter}:${v}`;
-            if (bibleData[ref]) result.push(`<bclass="verse-num">${v}</b> ${bibleData[ref]}`);
+            // ЗАМІНЕНО: прибрано <b>, залишено тільки span
+            if (bibleData[ref]) result.push(`<span class="verse-num">${v}</span> ${bibleData[ref]}`);
         });
     }
     return result.length > 0 ? result.join('<br>') : null;
