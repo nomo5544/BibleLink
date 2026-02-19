@@ -47,7 +47,7 @@ body {
 
 .side-tab.active {
     background: #fff;
-    width: 35px;
+    width: 40px;
     color: #000;
     margin-right: -15px;
     padding-left: 15px; 
@@ -59,7 +59,7 @@ body {
 /* 4. Кнопка "+" */
 .add-tab-btn {
     background: #fff;
-    width: 22px;
+    width: 30px;
     padding: 30px 5px;
     color: #000;
     border: 1px solid #8b4513;
