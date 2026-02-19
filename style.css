@@ -120,6 +120,17 @@ body {
     word-wrap: break-word;
     text-align: left;     /* Чітке вирівнювання по лівому краю */
 }
+/* --- ПРИМУСОВИЙ МАСШТАБ ТЕКСТУ ТА ІНТЕРВАЛ --- */
+#textcontent, 
+#textcontent * {
+    font-size: 30px !important;    /* Великий шрифт */
+    line-height: 1.7 !important;   /* Ваш масштаб 1.7 */
+    font-family: 'Segoe UI', sans-serif !important;
+    color: #2c3e50;
+    /* Важливо: прибираємо зовнішні відступи для вкладених елементів, щоб не їхало форматування */
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 /* Окремий відступ між абзацами, якщо вони є */
 #textcontent p {
