@@ -24,7 +24,10 @@ body {
     width: 50px;
     pointer-events: auto; /* Дозволяємо кліки */
 }
-
+/* Додайте це на початку, щоб ширина завжди рахувалася однаково */
+.side-tab, .add-tab-btn {
+    box-sizing: border-box; 
+}
 .side-tab {
     position: relative;
     background: #F7E7CE;
