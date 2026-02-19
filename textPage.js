@@ -113,18 +113,25 @@ function loadPage(index) {
 function processText(html) {
     if (!html) return "";
     let txt = html.replace(/&nbsp;/g, ' ').replace(/\u00a0/g, ' ');
+    
+    // Регулярний вираз для пошуку книг і розділів
     const regex = /(\d?\s?[А-Яа-яІЇЄҐ][а-яіїєґ']{0,15}\.?)\s*(\d+)(?:\s*[\:\.]\s*(\d+(?:\s*[,\-\–]\s*\d+)*))?/g;
 
     return txt.replace(regex, function(match, book, ch, vs) {
-        const cleanBook = book.trim().replace(/\.$/, "");
-        const fullBook = bookNameMap[cleanBook];
+        // Очищаємо від зайвих пробілів та крапок в кінці
+        const cleanBook = book.trim().replace(/\.$/, "").toLowerCase(); 
+        
+        // Шукаємо в мапі (тепер ключі в мапі теж мають бути в нижньому регістрі для надійності)
+        // Або просто перевіряємо як є:
+        const fullBook = bookNameMap[cleanBook] || bookNameMap[book.trim().replace(/\.$/, "")];
+        
         if (!fullBook) return match;
 
         return `<span class="bible-link" 
                 data-book="${fullBook}" 
                 data-chapter="${ch}" 
                 data-verses="${vs || '1'}"
-                style="color: blue !important; cursor: pointer !important;">${match}</span>`;
+                style="color: blue !important; cursor: pointer !important; text-decoration: underline;">${match}</span>`;
     });
 }
 
