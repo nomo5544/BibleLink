@@ -163,22 +163,29 @@ function saveNewPage() {
     let title = document.getElementById('pageTitle').value.trim();
     const content = document.getElementById('inputArea').innerHTML;
 
-    // Автоматична назва
     if (!title) {
         title = "Урок " + (pages.length + 1);
     }
 
-    // Додаємо в масив
+    // 1. Додаємо нову сторінку в масив
     pages.push({ title: title, content: content });
 
-    // Зберігаємо в пам'ять браузера
+    // 2. Зберігаємо оновлений список у пам'ять
     localStorage.setItem('bible_pages', JSON.stringify(pages));
+
+    // 3. РОБИМО НОВУ СТОРІНКУ АКТИВНОЮ
+    // Індекс нової сторінки — це останній елемент масиву (довжина масиву мінус 1)
+    currentPageIndex = pages.length - 1;
 
     // 4. Оновлюємо інтерфейс
     renderTabs();
+    
+    // 5. Одразу завантажуємо вміст нової сторінки
+    loadPage(currentPageIndex);
+
+    // 6. Закриваємо вікно
     closeAddDialog();
 }
-
 function deletePage(e, index) {
     e.stopPropagation();
     if (confirm(`Видалити сторінку "${pages[index].title}"?`)) {
