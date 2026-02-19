@@ -121,38 +121,38 @@ body {
 }
 
 /* --- Модальне вікно --- */
-/* --- Контейнер для назви та кнопок в одну лінію --- */
-.modal-header-row {
-    display: flex;
-    align-items: center; /* Вирівнювання по центру висоти */
-    gap: 10px;           /* Відступ між елементами */
-    margin-bottom: 15px;
+/* Контейнер для інпуту та кнопок */
+.modal-header-container {
+    display: flex;         /* Вмикаємо гнучкість */
+    align-items: center;   /* Рівняємо по центру висоти */
+    gap: 15px;             /* Відступ між інпутом і кнопками */
+    margin-bottom: 15px;   /* Відступ від великого поля вводу */
 }
 
+/* Назва сторінки займає весь вільний простір */
 #pageTitle {
-    flex: 1;             /* Поле назви займає весь доступний простір */
-    padding: 12px;
+    flex: 1;               
+    padding: 10px;
     font-size: 18px;
     border: 2px solid #d2b48c;
     border-radius: 8px;
     box-sizing: border-box;
-    margin-bottom: 0;    /* Прибираємо нижній відступ, бо він тепер у контейнері */
 }
 
+/* Кнопки в одну лінію */
 .modal-buttons {
     display: flex;
-    gap: 10px;           /* Відступ між самими кнопками */
-    margin-top: 0;       /* Прибираємо верхній відступ */
+    gap: 10px;
+    white-space: nowrap;   /* Щоб кнопки не переносилися на новий рядок */
 }
 
-button {
-    padding: 12px 20px;
-    cursor: pointer;
-    border-radius: 8px;
-    border: none;
+/* Стиль самих кнопок (якщо ще не налаштований) */
+.save-btn, .cancel-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
     font-weight: bold;
-    white-space: nowrap; /* Щоб текст на кнопках не переношувався */
+    cursor: pointer;
+    border: none;
 }
-
 .save-btn { background: #2ecc71; color: white; }
 .cancel-btn { background: #e74c3c; color: white; }
