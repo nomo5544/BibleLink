@@ -239,19 +239,41 @@ function getCombinedText(book, chapter, versesStr) {
 }
 
 function showTooltip(event, text) {
-    hideTooltip();
-    tooltip = document.createElement('div');
-    // Повернуто ваші точні налаштування стилів та розміру 22px
-    tooltip.style.cssText = `
-        position: absolute; background: #ffffff; border: 1px solid #8b4513; 
-        padding: 15px; z-index: 10000; font-size: 22px; max-width: 550px; 
-        border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
-        color: #2c3e50; line-height: 1.5; pointer-events: none;
-    `;
+    let tooltip = document.getElementById('bible-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'bible-tooltip';
+        tooltip.className = 'bible-tooltip';
+        document.body.appendChild(tooltip);
+    }
+
     tooltip.innerHTML = text;
-    document.body.appendChild(tooltip);
-    tooltip.style.left = (event.pageX + 15) + 'px';
-    tooltip.style.top = (event.pageY + 15) + 'px';
+    tooltip.style.display = 'block';
+
+    // Отримуємо координати посилання
+    const rect = event.target.getBoundingClientRect();
+    
+    // Розрахунок позиції (над посиланням)
+    let left = rect.left + window.scrollX;
+    let top = rect.top + window.scrollY - tooltip.offsetHeight - 10;
+
+    // ПЕРЕВІРКА МЕЖ ЕКРАНУ (щоб не ховалося)
+    
+    // Вправо
+    if (left + tooltip.offsetWidth > window.innerWidth) {
+        left = window.innerWidth - tooltip.offsetWidth - 20;
+    }
+    
+    // Вліво
+    if (left < 10) left = 10;
+
+    // Вгору (якщо над посиланням немає місця — показуємо під ним)
+    if (rect.top < tooltip.offsetHeight + 20) {
+        top = rect.bottom + window.scrollY + 10;
+    }
+
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
 }
 
 function hideTooltip() {
