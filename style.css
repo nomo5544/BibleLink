@@ -105,7 +105,7 @@ body {
 
 /* --- ОСНОВНИЙ ТЕКСТ (Форматування) --- */
 #textcontent {
-    max-width: 1000px;
+    max-width: 960px;
     margin: 0 auto;
     white-space: pre-wrap;
     word-wrap: break-word;
