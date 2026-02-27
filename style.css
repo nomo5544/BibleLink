@@ -242,5 +242,21 @@ body {
 .bible-tooltip.show {
     opacity: 1;
 }
-.save-btn { background: #2ecc71; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer; }
-.cancel-btn { background: #e74c3c; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer; }
+.save-btn { 
+    background:  /* #2ecc71;  Колір кнопки */
+    color: white; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    border: none; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+.cancel-btn { 
+    background:  /* #e74c3c;  Колір кнопки */
+    color: white; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    border: none; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
