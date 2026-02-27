@@ -17,20 +17,24 @@
             </div>
         </main>
     </div>
-
-<div id="addDialog" class="modal" style="display:none;">
-    <div class="modal-content">
-        <div class="modal-header-container">
-            <input type="text" id="pageTitle" placeholder="Назва (напр. Частина 1)">
-            <div class="modal-buttons">
-                <button class="save-btn" onclick="saveNewPage()">Зберегти</button>
-                <button class="cancel-btn" onclick="closeAddDialog()">Скасувати</button>
-            </div>
-        </div>
-
-        <div contenteditable="true" id="inputArea" placeholder="Вставте або напишіть текст тут..."></div>
+    
+    <div style="text-align: center; padding: 20px; opacity: 0.3; font-size: 12px; font-family: sans-serif;">
+        Версія: <span id="app-version">v1.014</span>
     </div>
-</div>
+    
+    <div id="addDialog" class="modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header-container">
+                <input type="text" id="pageTitle" placeholder="Назва (напр. Частина 1)">
+                <div class="modal-buttons">
+                    <button class="save-btn" onclick="saveNewPage()">Зберегти</button>
+                    <button class="cancel-btn" onclick="closeAddDialog()">Скасувати</button>
+                </div>
+            </div>
+    
+            <div contenteditable="true" id="inputArea" placeholder="Вставте або напишіть текст тут..."></div>
+        </div>
+    </div>
 
     <script src="textPage.js"></script>
 </body>
