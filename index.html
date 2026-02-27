@@ -38,5 +38,15 @@
     </div>
 
     <script src="textPage.js"></script>
+    <script>
+      // Функція, яка "сходить" до Service Worker і запитає версію
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then(registration => {
+          if (registration && registration.active) {
+            console.log("Service Worker активний");
+          }
+        });
+      }
+    </script>
 </body>
 </html>
