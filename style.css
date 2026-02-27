@@ -245,7 +245,7 @@ body {
 .save-btn { 
     background:  /* #2ecc71;  Колір кнопки */
     color: white; 
-    padding: 10px 20px; 
+    padding: 12px 20px; 
     border-radius: 5px; 
     border: none; 
     font-weight: bold; 
@@ -254,7 +254,7 @@ body {
 .cancel-btn { 
     background:  /* #e74c3c;  Колір кнопки */
     color: white; 
-    padding: 10px 20px; 
+    padding: 12px 20px; 
     border-radius: 5px; 
     border: none; 
     font-weight: bold; 
