@@ -6,6 +6,7 @@ const urlsToCache = [
   './textPage.js',
   './bibleText.json',
   './manifest.webmanifest',
+  './fone.jpg',
   './icon-192.png',
   './icon-512.png'
 ];
