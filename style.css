@@ -97,7 +97,7 @@ body {
     background: white;
     flex: 1;
     /* Центрування та обмеження ширини як у Google Docs */
-    max-width: 850px; 
+    max-width: 1200px; 
     margin: 30px auto; 
     
     /* Відступи всередині аркуша */
