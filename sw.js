@@ -1,7 +1,7 @@
 const CACHE_NAME = 'bible-app-v1.0144';
 const urlsToCache = [
   './',
-  './textPage.html',
+  './index.html',
   './style.css',
   './textPage.js',
   './bibleText.json',
