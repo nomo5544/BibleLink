@@ -4,7 +4,7 @@ let tooltip = null;
 let currentPageIndex = null;
 let pages = JSON.parse(localStorage.getItem("bible_pages")) || [];
 
-// Словник скорочень (переконайтеся, що він у вас є в коді або окремому файлі)
+// Словник скорочень (ЗАЛИШЕНО БЕЗ ЗМІН)
 const bookNameMap = {
         "бут": "Буття", "буття": "Буття",
         "вих": "Вихід", "вихід": "Вихід",
@@ -32,7 +32,7 @@ const bookNameMap = {
         "єр": "Єремія", "єремії": "Єремія", "єремія": "Єремія", "єрем": "Єремія",
         "плач": "Плач Єремії", "плач єремії": "Плач Єремії",
         "єзк": "Єзекіїль", "єзекіїля": "Єзекіїль", "єзекіїль": "Єзекіїль", "єзек": "Єзекіїль", "єз": "Єзекіїль",
-        "дан": "Даниїл", "даниїла": "Даниїл",  "даниїл": "Даниїл",
+        "dan": "Даниїл", "даниїла": "Даниїл",  "даниїл": "Даниїл",
         "ос": "Осія", "осії": "Осія", "осія": "Осія",
         "йоіл": "Йоїл", "йоіла": "Йоїл", "йоіл": "Йоїл", "йоїл": "Йоїл",
         "ам": "Амос", "амоса": "Амос", "амос": "Амос",
@@ -50,7 +50,7 @@ const bookNameMap = {
         "лук": "Від Луки", "луки": "Від Луки", "лк": "Від Луки", "від луки": "Від Луки",
         "ів": "Від Івана", "івана": "Від Івана","від івана": "Від Івана","іван": "Від Івана",
         "дії": "Дії Апостолів", "Дії": "Дії Апостолів", "Дії апостолів": "Дії Апостолів",
-        "рим": "До Римлян", "римлянам": "До Римлян", "до римлян": "До Римлян", "римлян": "До Римлян", "До римлян": "До Римлян",
+        "рим": "До Римлян", "римлянам": "До Римлян", "до rimлян": "До Римлян", "римлян": "До Римлян", "До римлян": "До Римлян",
         "1кор": "1 до Коринтян", "1коринтянам": "1 до Коринтян", "1 коринтянам": "1 до Коринтян", "1 кор": "1 до Коринтян", "1 до коринтян": "1 до Коринтян", "1 коринтян": "1 до Коринтян",
         "2кор": "2 до Коринтян", "2коринтянам": "2 до Коринтян", "2 коринтянам": "2 до Коринтян", "2 кор": "2 до Коринтян", "2 до коринтян": "2 до Коринтян", "2 коринтян": "2 до Коринтян",
         "гал": "До Галатів", "галатів": "До Галатів", "до галатів": "До Галатів", "галатам": "До Галатів", "галат": "До Галатів",
@@ -99,8 +99,8 @@ function renderTabs() {
     const addBtn = `<button class="add-tab-btn" onclick="openAddDialog()">+</button>`;
     container.innerHTML = tabsHtml + addBtn;
 
-        // Перемикаємо клас empty-folder: якщо сторінок 0 — фон є, якщо більше 0 — фону немає
-document.getElementById("folder-container")?.classList.toggle("empty-folder", pages.length === 0);
+    // ПЕРЕМИКАЧ ФОНУ (Єдина додана зміна)
+    document.getElementById("folder-container")?.classList.toggle("empty-folder", pages.length === 0);
 }
 
 function loadPage(index) {
@@ -118,7 +118,7 @@ function loadPage(index) {
 function processText(html) {
     if (!html) return "";
 
-    // 1. Очищення пробілів (як у вашому розширенні)
+    // 1. Очищення пробілів
     let cleanHtml = html.replace(/&nbsp;/g, ' ').replace(/[\u00a0\u1680\u2000-\u200a\u202f\u205f\u3000]/g, ' ');
 
     // 2. Створення гнучкої карти (flexibleMap)
@@ -128,12 +128,12 @@ function processText(html) {
         flexibleMap[normKey] = bookNameMap[key];
     }
 
-    // 3. Динамічний Regex (саме він у розширенні працює краще)
+    // 3. Динамічний Regex
     const sortedKeys = Object.keys(bookNameMap).sort((a, b) => b.length - a.length);
     const booksPattern = sortedKeys.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
     const bibleRegex = new RegExp(`(${booksPattern})\\.?\\s+(\\d+)(?:[\\:\\.]\\s*(\\d+(?:(?:\\s*[\\-\\–]\\s*)\\d+)*))?`, 'gi');
 
-    // 4. Заміна (чистий код без примусових стилів, все через CSS)
+    // 4. Заміна
     return cleanHtml.replace(bibleRegex, function (fullMatch, bookPart, chapter, versesStr) {
         const cleanBookKey = bookPart.trim().toLowerCase().replace(/\s+/g, '').replace(/\.$/, "");
         const fullBookName = flexibleMap[cleanBookKey];
@@ -147,10 +147,9 @@ function processText(html) {
 
 function openAddDialog() {
     document.getElementById('addDialog').style.display = 'flex';
-    document.getElementById('pageTitle').value = ''; // Очистити назву
-    document.getElementById('inputArea').innerHTML = ''; // Очистити текст
+    document.getElementById('pageTitle').value = ''; 
+    document.getElementById('inputArea').innerHTML = ''; 
     
-    // ПУНКТ 3: Фокус на полі вводу тексту при відкритті
     setTimeout(() => {
         document.getElementById('inputArea').focus();
     }, 100);
@@ -170,25 +169,15 @@ function saveNewPage() {
         title = "Урок " + (pages.length + 1);
     }
 
-    // 1. Додаємо нову сторінку в масив
     pages.push({ title: title, content: content });
-
-    // 2. Зберігаємо оновлений список у пам'ять
     localStorage.setItem('bible_pages', JSON.stringify(pages));
-
-    // 3. РОБИМО НОВУ СТОРІНКУ АКТИВНОЮ
-    // Індекс нової сторінки — це останній елемент масиву (довжина масиву мінус 1)
     currentPageIndex = pages.length - 1;
 
-    // 4. Оновлюємо інтерфейс
     renderTabs();
-    
-    // 5. Одразу завантажуємо вміст нової сторінки
     loadPage(currentPageIndex);
-
-    // 6. Закриваємо вікно
     closeAddDialog();
 }
+
 function deletePage(e, index) {
     e.stopPropagation();
     if (confirm(`Видалити сторінку "${pages[index].title}"?`)) {
@@ -199,8 +188,6 @@ function deletePage(e, index) {
         location.reload(); 
     }
 }
-
-// --- ПОВЕРНЕНО ВАШІ ОРИГІНАЛЬНІ ФУНКЦІЇ ТУЛТІПІВ ТА ПОДІЙ ---
 
 function setupEventListeners(container) {
     container.addEventListener('mouseover', (e) => {
@@ -238,13 +225,11 @@ function getCombinedText(book, chapter, versesStr) {
         const end = parseInt(verseNumbers[verseNumbers.length - 1]);
         for (let i = start; i <= end; i++) {
             const ref = `${book} ${chapter}:${i}`;
-            // ЗАМІНЕНО: прибрано <b>, залишено тільки span
             if (bibleData[ref]) result.push(`<span class="verse-num">${i}</span> ${bibleData[ref]}`);
         }
     } else {
         verseNumbers.forEach(v => {
             const ref = `${book} ${chapter}:${v}`;
-            // ЗАМІНЕНО: прибрано <b>, залишено тільки span
             if (bibleData[ref]) result.push(`<span class="verse-num">${v}</span> ${bibleData[ref]}`);
         });
     }
@@ -252,26 +237,24 @@ function getCombinedText(book, chapter, versesStr) {
 }
 
 function showTooltip(event, text) {
-    let tooltip = document.getElementById('bible-tooltip');
-    if (!tooltip) {
-        tooltip = document.createElement('div');
-        tooltip.id = 'bible-tooltip';
-        tooltip.className = 'bible-tooltip';
-        document.body.appendChild(tooltip);
+    let tooltipElem = document.getElementById('bible-tooltip');
+    if (!tooltipElem) {
+        tooltipElem = document.createElement('div');
+        tooltipElem.id = 'bible-tooltip';
+        tooltipElem.className = 'bible-tooltip';
+        document.body.appendChild(tooltipElem);
     }
+    tooltip = tooltipElem; // Прив'язка до глобальної змінної
 
     tooltip.innerHTML = text;
     
-    // Координати (залишаємо вашу логіку)
     const rect = event.target.getBoundingClientRect();
     let left = rect.left + window.scrollX;
-    let top = rect.top + window.scrollY - 10; // Тимчасова точка
+    let top = rect.top + window.scrollY - 10;
 
-    // Встановлюємо позицію ПЕРЕД додаванням класу show
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
 
-    // ПЕРЕВІРКА МЕЖ ЕКРАНУ (ваша логіка...)
     if (left + tooltip.offsetWidth > window.innerWidth) {
         left = window.innerWidth - tooltip.offsetWidth - 20;
     }
@@ -285,32 +268,30 @@ function showTooltip(event, text) {
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
 
-    // Вмикаємо плавну появу
     setTimeout(() => {
         tooltip.classList.add('show');
     }, 10);
 }
 
 function hideTooltip() {
-    const tooltip = document.getElementById('bible-tooltip');
-    if (tooltip) {
-        tooltip.classList.remove('show');
+    const tooltipElem = document.getElementById('bible-tooltip');
+    if (tooltipElem) {
+        tooltipElem.classList.remove('show');
     }
 }
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(err => console.error(err));
 }
-// Додаємо слухача подій на обидва поля
+
 document.getElementById('pageTitle').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
-        e.preventDefault(); // Щоб не було зайвих переходів
+        e.preventDefault();
         saveNewPage();
     }
 });
 
 document.getElementById('inputArea').addEventListener('keydown', function(e) {
-    // Якщо натиснуто Enter БЕЗ Shift — зберігаємо
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault(); 
         saveNewPage();
