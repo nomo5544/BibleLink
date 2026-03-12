@@ -263,7 +263,7 @@ body {
 /* Відображення фонової картинки, коли немає вкладок */
 /* Фонова картинка з легким затемненням */
 .folder-container.empty-folder .paper-page {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('fone.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9)), url('fone.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
