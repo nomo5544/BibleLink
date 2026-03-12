@@ -40,7 +40,7 @@ body {
     cursor: pointer;
     border: 1px solid #8b4513;
     border-right: none;
-    font-weight: bold;
+    font-weight: normal !important;
     color: #5d2e0a;
     transition: all 0.2s ease;
 }
