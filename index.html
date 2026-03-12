@@ -20,9 +20,7 @@
             </div>
         </main>
     </div>
-    
 
-    
     <div id="addDialog" class="modal" style="display:none;">
         <div class="modal-content">
             <div class="modal-header-container">
@@ -32,7 +30,6 @@
                     <button class="cancel-btn" onclick="closeAddDialog()">Скасувати</button>
                 </div>
             </div>
-    
             <div contenteditable="true" id="inputArea" placeholder="Вставте або напишіть текст тут..."></div>
         </div>
     </div>
@@ -42,12 +39,13 @@
       async function displayVersion() {
         try {
           const response = await fetch('sw.js');
+          if (!response.ok) return;
           const text = await response.text();
           const match = text.match(/v\d+\.\d+/); 
           const versionElement = document.getElementById('app-version');
-          if (match) {
+          
+          if (match && versionElement) {
             versionElement.innerText = match[0];
-            // Функція оновлення при кліку (без візуальних змін тексту)
             versionElement.onclick = async function() {
               if (confirm("Оновити кеш додатка та перезавантажити сторінку?")) {
                 const cacheNames = await caches.keys();
