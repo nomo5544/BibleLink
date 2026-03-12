@@ -260,3 +260,28 @@ body {
     font-weight: bold; 
     cursor: pointer; 
 }
+/* Стан порожньої папки */
+.folder-container.empty-folder .paper-page {
+    /* Тут вкажіть шлях до вашого фону */
+    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
+                url('background-image.jpg'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Приховуємо вітальний текст, якщо папка НЕ порожня */
+.welcome-overlay {
+    display: none;
+    text-align: center;
+    padding: 40px;
+    border: 2px dashed #8b4513;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.folder-container.empty-folder .welcome-overlay {
+    display: block;
+}
