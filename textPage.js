@@ -98,6 +98,9 @@ function renderTabs() {
 
     const addBtn = `<button class="add-tab-btn" onclick="openAddDialog()">+</button>`;
     container.innerHTML = tabsHtml + addBtn;
+
+        // Перемикаємо клас empty-folder: якщо сторінок 0 — фон є, якщо більше 0 — фону немає
+document.getElementById("folder-container")?.classList.toggle("empty-folder", pages.length === 0);
 }
 
 function loadPage(index) {
