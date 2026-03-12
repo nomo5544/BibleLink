@@ -260,3 +260,10 @@ body {
     font-weight: bold; 
     cursor: pointer; 
 }
+/* Відображення фонової картинки, коли немає вкладок */
+.folder-container.empty-folder .paper-page {
+    background-image: url('fone.jpg'); /* Назва вашого файлу картинки */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
