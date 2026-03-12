@@ -7,8 +7,8 @@ const urlsToCache = [
   './bibleText.json',
   './manifest.webmanifest',
   './fone.jpg',
-  './icon-192.png',
-  './icon-512.png'
+  './icon192.png',
+  './icon512.png'
 ];
 
 // Інсталяція: кешуємо всі файли
