@@ -254,16 +254,16 @@ body {
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: 120px;
+    width: 80px;
     text-align: center;
 }
 
 /* Цифри таймера */
 .timer-display {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 34px;
+    /* font-weight: bold; */
     color: #2c3e50;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     font-family: monospace; /* Для стабільності ширини цифр */
 }
 
@@ -285,7 +285,7 @@ body {
 }
 
 .timer-btn.start {
-    background-color: #8b4513; /* Ваш фірмовий колір */
+    background-color: #7f8c8d; /* Ваш фірмовий колір */
 }
 
 .timer-btn.stop {
