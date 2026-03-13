@@ -236,64 +236,91 @@ function getCombinedText(book, chapter, versesStr) {
     return result.length > 0 ? result.join('<br>') : null;
 }
 
+function setupEventListeners(container) {
+    container.addEventListener('mouseover', (e) => {
+        const link = e.target.closest('.bible-link');
+        if (link) {
+            const book = link.getAttribute('data-book');
+            const chapter = link.getAttribute('data-chapter');
+            const versesStr = link.getAttribute('data-verses');
+            const combinedText = getCombinedText(book, chapter, versesStr);
+            if (combinedText) showTooltip(e, combinedText);
+        }
+    });
+
+    container.addEventListener('mousemove', (e) => {
+        if (tooltip) {
+            // Використовуємо просту логіку слідування за курсором
+            updateTooltipPosition(e);
+        }
+    });
+
+    container.addEventListener('mouseout', (e) => {
+        if (e.target.closest('.bible-link')) {
+            hideTooltip();
+        }
+    });
+}
+
 function showTooltip(event, text) {
-    let tooltipElem = document.getElementById('bible-tooltip');
-    if (!tooltipElem) {
-        tooltipElem = document.createElement('div');
-        tooltipElem.id = 'bible-tooltip';
-        tooltipElem.className = 'bible-tooltip';
-        document.body.appendChild(tooltipElem);
-    }
-    
-    tooltip = tooltipElem;
+    hideTooltip(); // Видаляємо старий, якщо є
+
+    tooltip = document.createElement('div');
+    tooltip.id = 'bible-tooltip';
+    tooltip.className = 'bible-tooltip'; // Стилі беруться з вашого CSS
     tooltip.innerHTML = text;
+    document.body.appendChild(tooltip);
 
-    // Скидаємо стилі перед розрахунками
-    tooltip.style.display = 'block'; 
-    tooltip.style.visibility = 'hidden'; 
-    
-    const rect = tooltip.getBoundingClientRect();
-    const tooltipWidth = 500; // Фіксована ширина з вашого CSS
-    const tooltipHeight = rect.height;
-    
-    // Координати курсору
-    let left = event.pageX + 20;
-    let top = event.pageY - (tooltipHeight / 2); // Центруємо по вертикалі відносно курсору
+    updateTooltipPosition(event);
 
-    // 1. Перевірка правого краю: якщо виходить за межі, кидаємо наліво
+    // Додаємо клас show для плавного переходу з CSS
+    requestAnimationFrame(() => {
+        tooltip.classList.add('show');
+    });
+}
+
+function updateTooltipPosition(event) {
+    if (!tooltip) return;
+
+    const gap = 15;
+    const tooltipWidth = tooltip.offsetWidth || 500;
+    const tooltipHeight = tooltip.offsetHeight;
+    
+    let left = event.pageX + gap;
+    let top = event.pageY + gap;
+
+    // Перевірка правого краю (як у другому коді)
     if (left + tooltipWidth > window.innerWidth + window.scrollX) {
-        left = event.pageX - tooltipWidth - 20;
+        left = event.pageX - tooltipWidth - gap;
     }
 
-    // 2. Перевірка нижнього краю: якщо "провалюється" вниз
+    // Перевірка нижнього краю (щоб не провалювався вниз)
     if (top + tooltipHeight > window.innerHeight + window.scrollY) {
-        top = window.innerHeight + window.scrollY - tooltipHeight - 10;
+        top = event.pageY - tooltipHeight - gap;
     }
 
-    // 3. Перевірка верхнього краю: якщо виходить за верхню межу
-    if (top < window.scrollY) {
-        top = window.scrollY + 10;
-    }
+    // Захист від виходу за верхню або ліву межу
+    if (top < window.scrollY) top = window.scrollY + 5;
+    if (left < window.scrollX) left = window.scrollX + 5;
 
-    // Прибираємо від'ємні значення, якщо екран занадто малий
-    if (left < 10) left = 10;
-
-    // Застосовуємо позицію
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
-    tooltip.style.visibility = 'visible';
-
-    // Плавна поява через клас
+   
+        // Плавна поява через клас
     setTimeout(() => {
         tooltip.classList.add('show');
     }, 10);
 }
 
+}
+
 function hideTooltip() {
     if (tooltip) {
-        tooltip.classList.remove('show');
+        tooltip.remove(); // Повне видалення з DOM, як у другому коді
+        tooltip = null;
     }
 }
+
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(err => console.error(err));
