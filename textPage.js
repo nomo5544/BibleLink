@@ -289,6 +289,10 @@ function updateTooltipPosition(event) {
     }, 10);
 }
 
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(err => console.error(err));
+}
+
 function hideTooltip() {
     if (tooltip) {
         tooltip.remove(); // Повне видалення з DOM, як у другому коді
@@ -346,12 +350,6 @@ function resetTimer() {
     btn.classList.remove('stop');
     btn.classList.add('start');
 }
-
-
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(err => console.error(err));
-}
-
 document.getElementById('pageTitle').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
         e.preventDefault();
