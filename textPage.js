@@ -89,6 +89,8 @@ function renderTabs() {
     const container = document.getElementById("side-tabs");
     if (!container) return;
 
+    const addBtn = `<button class="add-tab-btn" onclick="openAddDialog()">+</button>`;
+        
     const tabsHtml = pages.map((page, index) => `
         <div class="side-tab ${currentPageIndex === index ? 'active' : ''}" onclick="loadPage(${index})">
             <span class="delete-tab" onclick="deletePage(event, ${index})">✕</span>
@@ -96,7 +98,6 @@ function renderTabs() {
         </div>
     `).join('');
 
-    const addBtn = `<button class="add-tab-btn" onclick="openAddDialog()">+</button>`;
     container.innerHTML = tabsHtml + addBtn;
 
     // ПЕРЕМИКАЧ ФОНУ (Єдина додана зміна)
