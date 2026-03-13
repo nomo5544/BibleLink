@@ -86,10 +86,13 @@ fetch('bibleText.json')
     .catch(err => console.error("Помилка завантаження бази:", err));
 
 function renderTabs() {
-    const container = document.getElementById("side-tabs");
+    const container = document.getElementById("side-tabs"); // або tabs-container
     if (!container) return;
 
+    // 1. Кнопка "+" завжди перша
     const addBtn = `<button class="add-tab-btn" onclick="openAddDialog()">+</button>`;
+
+    // 2. Список вкладок (тепер вони йдуть після кнопки)
     const tabsHtml = pages.map((page, index) => `
         <div class="side-tab ${currentPageIndex === index ? 'active' : ''}" onclick="loadPage(${index})">
             <span class="delete-tab" onclick="deletePage(event, ${index})">✕</span>
@@ -97,9 +100,9 @@ function renderTabs() {
         </div>
     `).join('');
 
-    container.innerHTML = tabsHtml + addBtn;
+    container.innerHTML = addBtn + tabsHtml;
 
-    // ПЕРЕМИКАЧ ФОНУ (Єдина додана зміна)
+    // ПЕРЕМИКАЧ ФОНУ
     document.getElementById("folder-container")?.classList.toggle("empty-folder", pages.length === 0);
 }
 
