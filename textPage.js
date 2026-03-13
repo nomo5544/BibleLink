@@ -90,7 +90,6 @@ function renderTabs() {
     if (!container) return;
 
     const addBtn = `<button class="add-tab-btn" onclick="openAddDialog()">+</button>`;
-        
     const tabsHtml = pages.map((page, index) => `
         <div class="side-tab ${currentPageIndex === index ? 'active' : ''}" onclick="loadPage(${index})">
             <span class="delete-tab" onclick="deletePage(event, ${index})">✕</span>
