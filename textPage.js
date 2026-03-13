@@ -313,7 +313,7 @@ function toggleTimer() {
         // Режим ПАУЗА/СТОП
         clearInterval(timerInterval);
         timerInterval = null;
-        btn.innerHTML = "▶"; // Повертаємо значок "Play"
+        btn.innerHTML = "▶️"; // Повертаємо значок "Play"
         btn.classList.remove('stop');
         btn.classList.add('start');
     } else {
@@ -342,7 +342,7 @@ function resetTimer() {
     
     // Повертаємо кнопку в початковий стан
     const btn = document.getElementById('timer-toggle');
-    btn.innerHTML = "▶";
+    btn.innerHTML = "▶️";
     btn.classList.remove('stop');
     btn.classList.add('start');
 }
