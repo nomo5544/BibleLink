@@ -206,8 +206,8 @@ function setupEventListeners(container) {
 
     container.addEventListener('mousemove', (e) => {
         if (tooltip) {
-            tooltip.style.left = (e.pageX + 15) + 'px';
-            tooltip.style.top = (e.pageY + 15) + 'px';
+            // Замість ручного присвоєння left/top викликаємо вашу розумну функцію
+            updateTooltipPosition(e);
         }
     });
 
@@ -216,6 +216,53 @@ function setupEventListeners(container) {
             hideTooltip();
         }
     });
+}
+
+function showTooltip(event, text) {
+    hideTooltip(); 
+
+    tooltip = document.createElement('div');
+    tooltip.id = 'bible-tooltip';
+    tooltip.className = 'bible-tooltip'; 
+    tooltip.innerHTML = text;
+    document.body.appendChild(tooltip);
+
+    // Робимо замір розмірів ПЕРЕД позиціонуванням
+    // Щоб offsetWidth/Height спрацювали, елемент має бути в DOM, але може бути невидимим
+    updateTooltipPosition(event);
+
+    // Плавна поява
+    requestAnimationFrame(() => {
+        if (tooltip) tooltip.classList.add('show');
+    });
+}
+
+function updateTooltipPosition(event) {
+    if (!tooltip) return;
+
+    const gap = 15;
+    const tooltipWidth = tooltip.offsetWidth || 300; // Резервне значення, якщо ще не промальовано
+    const tooltipHeight = tooltip.offsetHeight || 100;
+    
+    let left = event.pageX + gap;
+    let top = event.pageY + gap;
+
+    // Перевірка ПРАВОГО краю
+    if (left + tooltipWidth > window.innerWidth + window.scrollX - 20) {
+        left = event.pageX - tooltipWidth - gap;
+    }
+
+    // Перевірка НИЖНЬОГО краю
+    if (top + tooltipHeight > window.innerHeight + window.scrollY - 20) {
+        top = event.pageY - tooltipHeight - gap;
+    }
+
+    // Захист від виходу за верхню межу (якщо текст дуже довгий)
+    if (top < window.scrollY) top = window.scrollY + 5;
+    if (left < window.scrollX) left = window.scrollX + 5;
+
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
 }
 
 function getCombinedText(book, chapter, versesStr) {
