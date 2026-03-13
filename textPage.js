@@ -318,6 +318,47 @@ function hideTooltip() {
         tooltip = null;
     }
 }
+let timerInterval = null;
+let seconds = 0;
+
+function updateTimerDisplay() {
+    const display = document.getElementById('timer-display');
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    display.innerText = 
+        `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+function toggleTimer() {
+    const btn = document.getElementById('timer-toggle');
+    
+    if (timerInterval) {
+        // Зупинка
+        clearInterval(timerInterval);
+        timerInterval = null;
+        btn.innerText = "Старт";
+        btn.classList.remove('stop');
+        btn.classList.add('start');
+    } else {
+        // Старт
+        btn.innerText = "Стоп";
+        btn.classList.remove('start');
+        btn.classList.add('stop');
+        
+        timerInterval = setInterval(() => {
+            seconds++;
+            updateTimerDisplay();
+        }, 1000);
+    }
+}
+
+function resetTimer() {
+    // Зупиняємо, якщо біжить
+    if (timerInterval) toggleTimer();
+    
+    seconds = 0;
+    updateTimerDisplay();
+}
 
 
 if ('serviceWorker' in navigator) {
