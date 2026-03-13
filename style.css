@@ -294,9 +294,10 @@ body {
     justify-content: center;
 }
 
-.timer-btn.start { color: #27ae60; } /* Зелений старт */
-.timer-btn.stop { color: #c0392b; }  /* Червоний стоп/пауза */
-.timer-btn.reset { color: #7f8c8d; } /* Сірий скидання */
+/* Кольори для значків */
+.timer-btn.start { color: #27ae60; } /* Зелений ▶ */
+.timer-btn.stop  { color: #c0392b; } /* Червоний ⏸ */
+.timer-btn.reset { color: #7f8c8d; } /* Сірий ⏹ */
 
 .timer-btn:hover {
     transform: scale(1.2);
