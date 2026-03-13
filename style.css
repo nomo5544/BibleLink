@@ -212,7 +212,7 @@ body {
     max-width: 500px;
     max-height: 1000px;
     font-size: 20px;
-    line-height: 1.1;
+    line-height: 1.2;
     pointer-events: none;
     opacity: 0; 
     transition: opacity 0.3s ease-in-out;
