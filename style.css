@@ -287,7 +287,7 @@ body {
     border: none;
     padding: 4px;
     cursor: pointer;
-    font-size: 18px; /* Розмір значків */
+    font-size: 20px; /* Розмір значків */
     transition: transform 0.1s, color 0.2s;
     display: flex;
     align-items: center;
