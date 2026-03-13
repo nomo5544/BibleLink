@@ -237,8 +237,7 @@ body {
     margin-right: 4px !important;
     display: inline-block;
     vertical-align: baseline;
-}
-    
+  
     /* ПЛАВНІСТЬ */
     opacity: 0; 
     transition: opacity 0.3s ease-in-out; /* 0.3 секунди на появу */
