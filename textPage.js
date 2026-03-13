@@ -307,15 +307,15 @@ function toggleTimer() {
     const btn = document.getElementById('timer-toggle');
     
     if (timerInterval) {
-        // Зупинка
+        // Режим ПАУЗА/СТОП
         clearInterval(timerInterval);
         timerInterval = null;
-        btn.innerText = "Старт";
+        btn.innerHTML = "▶"; // Повертаємо значок "Play"
         btn.classList.remove('stop');
         btn.classList.add('start');
     } else {
-        // Старт
-        btn.innerText = "Стоп";
+        // Режим СТАРТ
+        btn.innerHTML = "⏸"; // Міняємо на значок "Pause"
         btn.classList.remove('start');
         btn.classList.add('stop');
         
@@ -327,11 +327,21 @@ function toggleTimer() {
 }
 
 function resetTimer() {
-    // Зупиняємо, якщо біжить
-    if (timerInterval) toggleTimer();
+    // Зупиняємо відлік
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
     
+    // Скидаємо цифри
     seconds = 0;
     updateTimerDisplay();
+    
+    // Повертаємо кнопку в початковий стан
+    const btn = document.getElementById('timer-toggle');
+    btn.innerHTML = "▶";
+    btn.classList.remove('stop');
+    btn.classList.add('start');
 }
 
 
