@@ -43,7 +43,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px; /* Фіксований відступ від кнопки до першої закладки */
+    margin-bottom: 5px; /* Фіксований відступ від кнопки до першої закладки */
     flex-shrink: 0;      /* Забороняємо кнопці стискатися */
     z-index: 101;
 }
