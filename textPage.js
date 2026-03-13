@@ -244,39 +244,54 @@ function showTooltip(event, text) {
         tooltipElem.className = 'bible-tooltip';
         document.body.appendChild(tooltipElem);
     }
-    tooltip = tooltipElem; // Прив'язка до глобальної змінної
-
-    tooltip.innerHTML = text;
     
-    const rect = event.target.getBoundingClientRect();
-    let left = rect.left + window.scrollX;
-    let top = rect.top + window.scrollY - 10;
+    tooltip = tooltipElem;
+    tooltip.innerHTML = text;
 
-    tooltip.style.left = left + 'px';
-    tooltip.style.top = top + 'px';
+    // Скидаємо стилі перед розрахунками
+    tooltip.style.display = 'block'; 
+    tooltip.style.visibility = 'hidden'; 
+    
+    const rect = tooltip.getBoundingClientRect();
+    const tooltipWidth = 500; // Фіксована ширина з вашого CSS
+    const tooltipHeight = rect.height;
+    
+    // Координати курсору
+    let left = event.pageX + 20;
+    let top = event.pageY - (tooltipHeight / 2); // Центруємо по вертикалі відносно курсору
 
-    if (left + tooltip.offsetWidth > window.innerWidth) {
-        left = window.innerWidth - tooltip.offsetWidth - 20;
+    // 1. Перевірка правого краю: якщо виходить за межі, кидаємо наліво
+    if (left + tooltipWidth > window.innerWidth + window.scrollX) {
+        left = event.pageX - tooltipWidth - 20;
     }
+
+    // 2. Перевірка нижнього краю: якщо "провалюється" вниз
+    if (top + tooltipHeight > window.innerHeight + window.scrollY) {
+        top = window.innerHeight + window.scrollY - tooltipHeight - 10;
+    }
+
+    // 3. Перевірка верхнього краю: якщо виходить за верхню межу
+    if (top < window.scrollY) {
+        top = window.scrollY + 10;
+    }
+
+    // Прибираємо від'ємні значення, якщо екран занадто малий
     if (left < 10) left = 10;
-    if (rect.top < tooltip.offsetHeight + 20) {
-        top = rect.bottom + window.scrollY + 10;
-    } else {
-        top = rect.top + window.scrollY - tooltip.offsetHeight - 10;
-    }
 
+    // Застосовуємо позицію
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
+    tooltip.style.visibility = 'visible';
 
+    // Плавна поява через клас
     setTimeout(() => {
         tooltip.classList.add('show');
     }, 10);
 }
 
 function hideTooltip() {
-    const tooltipElem = document.getElementById('bible-tooltip');
-    if (tooltipElem) {
-        tooltipElem.classList.remove('show');
+    if (tooltip) {
+        tooltip.classList.remove('show');
     }
 }
 
