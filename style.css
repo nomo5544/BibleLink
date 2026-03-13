@@ -244,60 +244,61 @@ body {
 }
 
 /* Контейнер таймера */
+/* Контейнер таймера — розміщений чітко над закладками */
 .timer-container {
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: 5px;
+    left: 5px;
     z-index: 3000;
     background: #fff;
     border: 1px solid #8b4513;
-    padding: 10px;
+    padding: 5px 8px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: 80px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 110px; /* Трохи розширено для горизонтальних кнопок */
     text-align: center;
+    box-sizing: border-box;
 }
 
-/* Цифри таймера */
+/* Цифри таймера — компактніші */
 .timer-display {
-    font-size: 34px;
-    /* font-weight: bold; */
+    font-size: 28px;
     color: #2c3e50;
-    margin-bottom: 4px;
-    font-family: monospace; /* Для стабільності ширини цифр */
+    margin-bottom: 2px;
+    font-family: 'Courier New', monospace;
+    line-height: 1;
 }
 
-/* Кнопки */
+/* Кнопки в один ряд */
 .timer-controls {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: row; /* Горизонтально */
+    justify-content: center;
+    gap: 8px;
 }
 
 .timer-btn {
+    background: none;
     border: none;
-    padding: 6px 10px;
-    border-radius: 4px;
+    padding: 4px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background 0.2s;
-    color: white;
+    font-size: 18px; /* Розмір значків */
+    transition: transform 0.1s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.timer-btn.start {
-    background-color: #7f8c8d; /* Ваш фірмовий колір */
-}
-
-.timer-btn.stop {
-    background-color: #c0392b; /* Червоний для зупинки */
-}
-
-.timer-btn.reset {
-    background-color: #7f8c8d; /* Сірий для скидання */
-}
+.timer-btn.start { color: #27ae60; } /* Зелений старт */
+.timer-btn.stop { color: #c0392b; }  /* Червоний стоп/пауза */
+.timer-btn.reset { color: #7f8c8d; } /* Сірий скидання */
 
 .timer-btn:hover {
-    filter: brightness(1.2);
+    transform: scale(1.2);
+}
+
+.timer-btn:active {
+    transform: scale(0.9);
 }
 
 .save-btn { 
