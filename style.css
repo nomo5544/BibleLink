@@ -24,6 +24,12 @@ body {
     width: 50px;
     pointer-events: auto; /* Дозволяємо кліки */
 }
+
+/* Додайте це на початку, щоб ширина завжди рахувалася однаково */
+.side-tab, .add-tab-btn {
+    box-sizing: border-box; 
+}
+
 /* 4. Кнопка "+" */
 .add-tab-btn {
     background: #fff;
@@ -37,11 +43,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15px; /* Фіксований відступ від кнопки до першої закладки */
+    flex-shrink: 0;      /* Забороняємо кнопці стискатися */
+    z-index: 101;
 }
-/* Додайте це на початку, щоб ширина завжди рахувалася однаково */
-.side-tab, .add-tab-btn {
-    box-sizing: border-box; 
-}
+
 .side-tab {
     position: relative;
     background: #F7E7CE;
