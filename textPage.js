@@ -312,8 +312,6 @@ function updateTooltipPosition(event) {
     }, 10);
 }
 
-}
-
 function hideTooltip() {
     if (tooltip) {
         tooltip.remove(); // Повне видалення з DOM, як у другому коді
