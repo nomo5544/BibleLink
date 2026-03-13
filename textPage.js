@@ -236,32 +236,6 @@ function getCombinedText(book, chapter, versesStr) {
     return result.length > 0 ? result.join('<br>') : null;
 }
 
-function setupEventListeners(container) {
-    container.addEventListener('mouseover', (e) => {
-        const link = e.target.closest('.bible-link');
-        if (link) {
-            const book = link.getAttribute('data-book');
-            const chapter = link.getAttribute('data-chapter');
-            const versesStr = link.getAttribute('data-verses');
-            const combinedText = getCombinedText(book, chapter, versesStr);
-            if (combinedText) showTooltip(e, combinedText);
-        }
-    });
-
-    container.addEventListener('mousemove', (e) => {
-        if (tooltip) {
-            // Використовуємо просту логіку слідування за курсором
-            updateTooltipPosition(e);
-        }
-    });
-
-    container.addEventListener('mouseout', (e) => {
-        if (e.target.closest('.bible-link')) {
-            hideTooltip();
-        }
-    });
-}
-
 function showTooltip(event, text) {
     hideTooltip(); // Видаляємо старий, якщо є
 
