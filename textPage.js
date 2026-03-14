@@ -227,17 +227,19 @@ function showTooltip(event, text) {
     tooltip.innerHTML = text;
     document.body.appendChild(tooltip);
 
-    // Встановлюємо позицію
+    // Одразу ставимо позицію
     updateTooltipPosition(event);
 
-    // Додаємо клас "show" ОДИН РАЗ при появі
-    // Використовуємо перевірку, щоб уникнути помилок
+    // Додаємо клас для плавної появи ОДИН РАЗ
     requestAnimationFrame(() => {
-        if (tooltip) tooltip.classList.add('show');
+        if (tooltip) {
+            tooltip.classList.add('show');
+        }
     });
 }
 
 function updateTooltipPosition(event) {
+    // 1. Якщо тултіпа вже немає (null) — негайно виходимо і нічого не робимо
     if (!tooltip) return;
 
     const gap = 15;
@@ -247,23 +249,25 @@ function updateTooltipPosition(event) {
     let left = event.pageX + gap;
     let top = event.pageY + gap;
 
-    // Перевірка меж екрана
+    // Перевірка правого краю
     if (left + tooltipWidth > window.innerWidth + window.scrollX - 20) {
         left = event.pageX - tooltipWidth - gap;
     }
 
+    // Перевірка нижнього краю
     if (top + tooltipHeight > window.innerHeight + window.scrollY - 20) {
         top = event.pageY - tooltipHeight - gap;
     }
 
+    // Захист від виходу за межі екрана
     if (top < window.scrollY) top = window.scrollY + 5;
     if (left < window.scrollX) left = window.scrollX + 5;
 
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
-    
-    // ТУТ БІЛЬШЕ НЕМАЄ setTimeout! 
-    // Це прибере помилку "Cannot read properties of null"
+
+    // ТУТ БУВ setTimeout — Я ЙОГО ВИДАЛИВ. 
+    // Він більше не буде спамити помилками в консоль.
 }
 
 function getCombinedText(book, chapter, versesStr) {
