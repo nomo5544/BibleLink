@@ -249,17 +249,18 @@ body {
 }
 
 /* Контейнер таймера — додаємо гнучкість */
+/* Контейнер таймера — повертаю твої відступи та ширину */
 .timer-container {
     position: fixed;
     top: 10px;
     left: 5px;
-    z-index: 3000; /* Підняв трохи вище */
+    z-index: 3000;
     background: #fff;
     border: 1px solid #8b4513;
-    padding: 4px; /* Трохи більше внутрішнього відступу */
+    padding: 4px; 
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 100px; /* Трохи розширив для тексту START/PAUSE */
+    width: 100px; 
     text-align: center;
     box-sizing: border-box;
     display: flex;
@@ -273,21 +274,22 @@ body {
     line-height: 1;
 }
 
-/* Вирівнюємо кнопки таймера по висоті та в один ряд */
+/* Кнопки — повертаю висоту 26px з твого коду */
 .timer-controls {
     display: flex;
-    align-items: stretch; 
+    align-items: stretch;  
     gap: 4px;
-    height: 26px; /* Фіксована висота кнопок */
+    height: 26px; /* Твоя точна висота */
 }
 
 .timer-btn.main-toggle {
     flex: 2;
-    font-size: 18px;
+    font-size: 18px; /* Твій розмір шрифту */
     cursor: pointer;
     border: 1px solid #8b4513;
     background: #fff;
-    border-radius: 6px;
+    color: #000;
+    border-radius: 8px; /* Радіус як у боксу таймера */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -296,22 +298,24 @@ body {
 }
 
 .timer-btn.reset {
-    width: 26px; /* Рівностороння кнопка */
+    width: 26px; /* Рівностороння (26х26) */
     height: 26px;
     flex: none;
     font-size: 16px;
     cursor: pointer;
     border: 1px solid #8b4513;
     background: #fff;
-    border-radius: 4px;
+    color: #000;
+    border-radius: 8px; /* Радіус як у боксу таймера */
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
 }
+
+/* Ховер залишаю мінімальний, щоб не міняти кольори */
 .timer-btn:hover {
-    background: #f7e7ce;
-    transform: scale(1.05);
+    background: #f0f0f0;
 }
 
 .save-btn { 
