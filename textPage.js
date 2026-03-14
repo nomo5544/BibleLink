@@ -270,7 +270,26 @@ function updateTooltipPosition(event) {
     // Він більше не буде спамити помилками в консоль.
 }
 
+function getCombinedText(book, chapter, versesStr) {
+    const verseNumbers = versesStr.match(/\d+/g);
+    if (!verseNumbers) return null;
 
+    let result = [];
+    if (versesStr.includes('-') || versesStr.includes('–')) {
+        const start = parseInt(verseNumbers[0]);
+        const end = parseInt(verseNumbers[verseNumbers.length - 1]);
+        for (let i = start; i <= end; i++) {
+            const ref = `${book} ${chapter}:${i}`;
+            if (bibleData[ref]) result.push(`<span class="verse-num">${i}</span> ${bibleData[ref]}`);
+        }
+    } else {
+        verseNumbers.forEach(v => {
+            const ref = `${book} ${chapter}:${v}`;
+            if (bibleData[ref]) result.push(`<span class="verse-num">${v}</span> ${bibleData[ref]}`);
+        });
+    }
+    return result.length > 0 ? result.join('<br>') : null;
+}
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(err => console.error(err));
