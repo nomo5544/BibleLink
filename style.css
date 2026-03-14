@@ -250,7 +250,7 @@ body {
 /* --- ТАЙМЕР (Синхронізовано з вашими розмірами) --- */
 .timer-container {
     position: fixed;
-    top: 10px;
+    top: 8px;
     left: 5px;
     z-index: 3000;
     background: #fff;
@@ -263,7 +263,7 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 14px;
 }
 
 .timer-display {
@@ -295,9 +295,9 @@ body {
 }
 
 .timer-btn.main-toggle {
-    width: 70px; /* ФІКСОВАНА ШИРИНА */
+    width: 80px; /* ФІКСОВАНА ШИРИНА */
     flex: none;  /* Прибираємо розтягування */
-    font-size: 16px; /* Трохи менше, щоб текст START вліз вільно */
+    font-size: 18px; /* Трохи менше, щоб текст START вліз вільно */
     text-transform: uppercase;
 }
 
