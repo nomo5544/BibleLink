@@ -44,7 +44,6 @@ body {
     width: 100px; /* Трохи розширено для горизонтальних кнопок */
     text-align: center;
     box-sizing: border-box;
-    width: 30px;
     cursor: pointer;
     font-size: 24px;
     display: flex;
