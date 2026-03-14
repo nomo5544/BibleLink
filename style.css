@@ -258,8 +258,7 @@ body {
     padding: 4px; /* Чітко 4px з усіх боків */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    /* Розрахунок: 80 (старт) + 24 (reset) + 4 (gap) + 8 (padding L/R) = 116px */
-    width: 116px; 
+    width: 100px; 
     text-align: center;
     box-sizing: border-box;
     display: flex;
@@ -299,7 +298,7 @@ body {
 }
 
 .timer-btn.main-toggle {
-    width: 80px; /* Твоя фіксована ширина */
+    width: 60px; /* Твоя фіксована ширина */
     font-size: 18px;
     text-transform: uppercase;
 }
