@@ -247,7 +247,7 @@ body {
     opacity: 1;
 }
 
-/* --- ТАЙМЕР (Синхронізовано) --- */
+/* --- ТАЙМЕР (Синхронізовано з вашими розмірами) --- */
 .timer-container {
     position: fixed;
     top: 10px;
@@ -256,7 +256,7 @@ body {
     background: #fff;
     border: 1px solid #8b4513;
     padding: 4px;
-    border-radius: 8px;
+    border-radius: 8px; /* Зовнішній радіус */
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     width: 100px;
     text-align: center;
@@ -270,13 +270,14 @@ body {
     font-size: 28px;
     color: #2c3e50;
     line-height: 1;
+    margin-bottom: 2px;
 }
 
 .timer-controls {
     display: flex;
-    align-items: stretch; 
+    justify-content: center; /* Центруємо кнопки всередині */
     gap: 4px;
-    height: 24px; /* Твоя висота */
+    height: 24px; 
 }
 
 .timer-btn {
@@ -284,23 +285,24 @@ body {
     border: 1px solid #8b4513;
     background: #fff;
     color: #000;
-    border-radius: 6px; /* Радіус як у таймера */
+    border-radius: 4px; /* Менший радіус для кнопок всередині */
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    outline: none; /* Прибрано жирну рамку */
+    outline: none;
+    transition: all 0.2s ease;
 }
 
 .timer-btn.main-toggle {
-    flex: 2;
-    width: 64px;
-    font-size: 18px;
+    width: 60px; /* ФІКСОВАНА ШИРИНА */
+    flex: none;  /* Прибираємо розтягування */
+    font-size: 16px; /* Трохи менше, щоб текст START вліз вільно */
     text-transform: uppercase;
 }
 
 .timer-btn.reset {
-    width: 24px;
+    width: 24px; /* Квадратна кнопка */
     flex: none;
     font-size: 16px;
 }
@@ -310,7 +312,9 @@ body {
     transform: scale(1.05);
 }
 
-.timer-btn:focus { outline: none; }
+.timer-btn:focus { 
+    outline: none; 
+}
 
 .save-btn { 
     background: #2ecc71; /* Колір кнопки */
