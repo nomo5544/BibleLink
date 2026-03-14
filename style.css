@@ -293,17 +293,45 @@ body {
     flex: none;
 }
 
-.timer-btn.main-toggle {
-    width: 64px;
-    font-size: 18px;
+/* Використовуємо твій ID з JS */
+#timer-toggle {
+    width: 64px !important;
+    min-width: 64px !important;
+    max-width: 64px !important;
+    flex: none !important;
+    
+    height: 24px;
+    font-size: 14px;
     text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #8b4513;
+    background: #fff;
+    color: #000;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    box-sizing: border-box;
 }
 
+/* Кнопка Reset — теж фіксуємо */
 .timer-btn.reset {
-    width: 24px;
-    font-size: 16px;
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    flex: none !important;
+    height: 24px;
+    border-radius: 4px;
+}
+
+/* Твої класи .start та .stop (якщо захочеш додати їм різні кольори пізніше) */
+#timer-toggle.start {
+    /* Тут можна нічого не писати, поки ми на білому фоні */
+}
+
+#timer-toggle.stop {
+    /* Тут теж, головне — ширина заблокована вище */
 }
 
 .timer-btn:hover {
