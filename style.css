@@ -276,7 +276,7 @@ body {
     display: flex;
     align-items: stretch; 
     gap: 4px;
-    height: 26px; /* Твоя висота */
+    height: 24px; /* Твоя висота */
 }
 
 .timer-btn {
@@ -284,7 +284,7 @@ body {
     border: 1px solid #8b4513;
     background: #fff;
     color: #000;
-    border-radius: 8px; /* Радіус як у таймера */
+    border-radius: 6px; /* Радіус як у таймера */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -294,18 +294,19 @@ body {
 
 .timer-btn.main-toggle {
     flex: 2;
+    width: 64px;
     font-size: 18px;
     text-transform: uppercase;
 }
 
 .timer-btn.reset {
-    width: 26px;
+    width: 24px;
     flex: none;
     font-size: 16px;
 }
 
 .timer-btn:hover {
-    background: #f7e7ce;
+    background: #f0f0f0;
     transform: scale(1.05);
 }
 
