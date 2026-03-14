@@ -290,17 +290,7 @@ body {
 }
 
 /* Кольори для значків */
-.timer-btn.start { color: #27ae60; } /* Зелений */
-.timer-btn.stop  { color: #c0392b; } /* Червоний */
 .timer-btn.reset { color: #7f8c8d; } /* Сірий */
-
-.timer-btn:hover {
-    transform: scale(1.2);
-}
-
-.timer-btn:active {
-    transform: scale(0.9);
-}
 /* Якщо хочете, щоб змінювався колір самого значка (працює не на всіх емодзі) */
 .timer-btn.start { color: #27ae60 !important; }
 .timer-btn.stop  { color: #c0392b !important; }
@@ -312,6 +302,15 @@ body {
 .timer-btn.stop {
     text-shadow: 0 0 5px rgba(192, 57, 43, 0.5);
 }
+
+.timer-btn:hover {
+    transform: scale(1.2);
+}
+
+.timer-btn:active {
+    transform: scale(0.9);
+}
+
 .save-btn { 
     background: #2ecc71; /* Колір кнопки */
     color: white; 
