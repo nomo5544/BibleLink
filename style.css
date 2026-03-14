@@ -257,7 +257,7 @@ body {
     z-index: 3000;
     background: #fff;
     border: 1px solid #8b4513;
-    padding: 4px 5px;
+    padding: 2px 2px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     width: 100px; /* Трохи розширено для горизонтальних кнопок */
