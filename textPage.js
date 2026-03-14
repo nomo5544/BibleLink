@@ -352,6 +352,10 @@ function resetTimer() {
         btn.classList.add('start');
     }
 }
+// Переконайся, що в кінці файлу або в ініціалізації є ці рядки:
+document.getElementById('timer-toggle').addEventListener('click', toggleTimer);
+document.getElementById('resetTimerBtn').addEventListener('click', resetTimer);
+
 document.getElementById('pageTitle').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
         e.preventDefault();
