@@ -16,7 +16,7 @@ body {
 .tabs-container {
     position: fixed;
     left: 0;
-    top: 90px;
+    top: 120px;
     display: flex;
     flex-direction: column;
     gap: 8px;
