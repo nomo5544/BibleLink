@@ -308,7 +308,7 @@ body {
 
 .timer-btn:hover {
     background: #f0f0f0;
-    transform: scale(1.5);
+    transform: scale(1.05);
 }
 .save-btn { 
     background: #2ecc71; /* Колір кнопки */
