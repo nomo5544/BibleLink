@@ -227,13 +227,13 @@ function showTooltip(event, text) {
     tooltip.innerHTML = text;
     document.body.appendChild(tooltip);
 
+    // Встановлюємо позицію
     updateTooltipPosition(event);
 
-    // БЕЗПЕЧНА ПОЯВА: додаємо перевірку if (tooltip)
+    // Додаємо клас "show" ОДИН РАЗ при появі
+    // Використовуємо перевірку, щоб уникнути помилок
     requestAnimationFrame(() => {
-        if (tooltip) {
-            tooltip.classList.add('show');
-        }
+        if (tooltip) tooltip.classList.add('show');
     });
 }
 
@@ -247,6 +247,7 @@ function updateTooltipPosition(event) {
     let left = event.pageX + gap;
     let top = event.pageY + gap;
 
+    // Перевірка меж екрана
     if (left + tooltipWidth > window.innerWidth + window.scrollX - 20) {
         left = event.pageX - tooltipWidth - gap;
     }
@@ -261,12 +262,8 @@ function updateTooltipPosition(event) {
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
     
-    // БЕЗПЕЧНИЙ ТАЙМАУТ: додаємо перевірку if (tooltip)
-    setTimeout(() => {
-        if (tooltip) {
-            tooltip.classList.add('show');
-        }
-    }, 10);
+    // ТУТ БІЛЬШЕ НЕМАЄ setTimeout! 
+    // Це прибере помилку "Cannot read properties of null"
 }
 
 function getCombinedText(book, chapter, versesStr) {
