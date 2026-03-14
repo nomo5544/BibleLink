@@ -247,7 +247,7 @@ body {
     opacity: 1;
 }
 
-/* --- ТАЙМЕР (Повна синхронізація розмірів) --- */
+/* --- ТАЙМЕР (Фіксовано 100px) --- */
 .timer-container {
     position: fixed;
     top: 8px;
@@ -255,11 +255,10 @@ body {
     z-index: 3000;
     background: #fff;
     border: 1px solid #8b4513;
-    padding: 4px; /* Чітко 4px з усіх боків */
+    padding: 4px; /* Твої 4px відступу */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 100px; 
-    text-align: center;
+    width: 100px; /* Суворо 100px */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -270,15 +269,13 @@ body {
     font-size: 28px;
     color: #2c3e50;
     line-height: 1;
-    margin-bottom: 2px;
+    text-align: center;
 }
 
 .timer-controls {
     display: flex;
-    /* Прибираємо center, щоб кнопки займали чітко свій простір від краю до краю */
-    justify-content: flex-start; 
-    gap: 4px;
-    height: 24px; /* Твоя висота */
+    gap: 4px; /* Твій gap */
+    height: 24px;
 }
 
 .timer-btn {
@@ -286,25 +283,24 @@ body {
     border: 1px solid #8b4513;
     background: #fff;
     color: #000;
-    border-radius: 4px; /* Твій новий радіус */
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     outline: none;
-    transition: all 0.2s ease;
-    box-sizing: border-box; /* Рамка входить у розмір кнопки */
-    flex-shrink: 0; /* ЗАБОРОНЯЄМО стискання кнопки браузером */
+    box-sizing: border-box;
+    border-radius: 4px; /* Твій радіус для кнопок */
+    flex-shrink: 0; /* Це те, що не давало кнопці тримати ширину */
 }
 
 .timer-btn.main-toggle {
-    width: 60px; /* Твоя фіксована ширина */
-    font-size: 18px;
+    width: 64px; /* Твоя математика */
+    font-size: 18px; /* Трохи менше, щоб PAUSE влізло в 64px без тиску */
     text-transform: uppercase;
 }
 
 .timer-btn.reset {
-    width: 24px; /* Твоя фіксована ширина */
+    width: 24px; /* Твоя математика */
     font-size: 16px;
 }
 
@@ -312,9 +308,6 @@ body {
     background: #f0f0f0;
     transform: scale(1.05);
 }
-
-.timer-btn:focus { outline: none; }
-
 .save-btn { 
     background: #2ecc71; /* Колір кнопки */
     color: white; 
