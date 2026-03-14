@@ -295,7 +295,7 @@ body {
 }
 
 .timer-btn.main-toggle {
-    width: 60px; /* ФІКСОВАНА ШИРИНА */
+    width: 70px; /* ФІКСОВАНА ШИРИНА */
     flex: none;  /* Прибираємо розтягування */
     font-size: 16px; /* Трохи менше, щоб текст START вліз вільно */
     text-transform: uppercase;
