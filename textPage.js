@@ -314,17 +314,21 @@ function updateTimerDisplay() {
 
 function toggleTimer() {
     const btn = document.getElementById('timer-toggle');
+    if (!btn) return;
     
     if (timerInterval) {
-        // Режим ПАУЗА/СТОП
+        // РЕЖИМ ПАУЗА
         clearInterval(timerInterval);
         timerInterval = null;
-        btn.innerHTML = "▶️"; // Повертаємо значок "Play"
+        
+        btn.innerHTML = "▶️"; 
+        // Змінюємо класи для кольору
         btn.classList.remove('stop');
         btn.classList.add('start');
     } else {
-        // Режим СТАРТ
-        btn.innerHTML = "⏸"; // Міняємо на значок "Pause"
+        // РЕЖИМ СТАРТ
+        btn.innerHTML = "⏸"; 
+        // Змінюємо класи для кольору
         btn.classList.remove('start');
         btn.classList.add('stop');
         
@@ -336,21 +340,21 @@ function toggleTimer() {
 }
 
 function resetTimer() {
-    // Зупиняємо відлік
     if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
     }
     
-    // Скидаємо цифри
     seconds = 0;
     updateTimerDisplay();
     
-    // Повертаємо кнопку в початковий стан
     const btn = document.getElementById('timer-toggle');
-    btn.innerHTML = "▶️";
-    btn.classList.remove('stop');
-    btn.classList.add('start');
+    if (btn) {
+        btn.innerHTML = "▶️";
+        // Скидаємо колір на початковий (зелений)
+        btn.classList.remove('stop');
+        btn.classList.add('start');
+    }
 }
 document.getElementById('pageTitle').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
