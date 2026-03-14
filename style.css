@@ -247,7 +247,7 @@ body {
     opacity: 1;
 }
 
-/* --- ТАЙМЕР (Фіксовано 100px) --- */
+/* --- ТАЙМЕР (Залізна фіксація 100px) --- */
 .timer-container {
     position: fixed;
     top: 8px;
@@ -255,10 +255,10 @@ body {
     z-index: 3000;
     background: #fff;
     border: 1px solid #8b4513;
-    padding: 4px; /* Твої 4px відступу */
+    padding: 4px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 100px; /* Суворо 100px */
+    width: 100px; /* Суворо 100 */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -274,8 +274,10 @@ body {
 
 .timer-controls {
     display: flex;
-    gap: 4px; /* Твій gap */
+    gap: 4px;
     height: 24px;
+    /* Вимикаємо будь-які спроби flexbox-у розтягнути кнопки */
+    align-items: center; 
 }
 
 .timer-btn {
@@ -289,18 +291,28 @@ body {
     padding: 0;
     outline: none;
     box-sizing: border-box;
-    border-radius: 4px; /* Твій радіус для кнопок */
-    flex-shrink: 0; /* Це те, що не давало кнопці тримати ширину */
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.2s;
+    /* ГАРАНТІЯ НЕ-СТИСКАННЯ ТА НЕ-РОЗШИРЕННЯ */
+    flex: none !important; 
 }
 
 .timer-btn.main-toggle {
-    width: 64px; /* Твоя математика */
-    font-size: 18px; /* Трохи менше, щоб PAUSE влізло в 64px без тиску */
+    /* Жорсткий корсет: мін, макс і звичайна ширина однакові */
+    width: 64px !important;
+    min-width: 64px !important;
+    max-width: 64px !important;
+    
+    font-size: 15px; /* Підібрано, щоб PAUSE не тиснуло на краї */
     text-transform: uppercase;
+    overflow: hidden; /* Щоб текст не вилазив за рамки */
+    white-space: nowrap; /* Заборона переносу рядка */
 }
 
 .timer-btn.reset {
-    width: 24px; /* Твоя математика */
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
     font-size: 16px;
 }
 
