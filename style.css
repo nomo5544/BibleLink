@@ -32,12 +32,19 @@ body {
 
 /* 4. Кнопка "+" */
 .add-tab-btn {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    z-index: 3000;
     background: #fff;
-    width: 30px;
-    padding: 6px 5px;
-    color: #000;
     border: 1px solid #8b4513;
-    border-radius: 0 8px 8px 0; 
+    padding: 4px 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 100px; /* Трохи розширено для горизонтальних кнопок */
+    text-align: center;
+    box-sizing: border-box;
+    width: 30px;
     cursor: pointer;
     font-size: 24px;
     display: flex;
@@ -45,7 +52,6 @@ body {
     align-items: center;
     margin-bottom: 5px; /* Фіксований відступ від кнопки до першої закладки */
     flex-shrink: 0;      /* Забороняємо кнопці стискатися */
-    z-index: 101;
 }
 
 .side-tab {
