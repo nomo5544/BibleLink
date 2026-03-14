@@ -352,20 +352,31 @@ function resetTimer() {
         btn.classList.add('start');
     }
 }
-// Переконайся, що в кінці файлу або в ініціалізації є ці рядки:
-document.getElementById('timer-toggle').addEventListener('click', toggleTimer);
-document.getElementById('resetTimerBtn').addEventListener('click', resetTimer);
+// Функція ініціалізації всіх подій після завантаження DOM
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('timer-toggle');
+    const resetBtn = document.getElementById('resetTimerBtn');
+    const titleInput = document.getElementById('pageTitle');
+    const areaInput = document.getElementById('inputArea');
 
-document.getElementById('pageTitle').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        saveNewPage();
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleTimer);
+    if (resetBtn) resetBtn.addEventListener('click', resetTimer);
+
+    if (titleInput) {
+        titleInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveNewPage();
+            }
+        });
     }
-});
 
-document.getElementById('inputArea').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault(); 
-        saveNewPage();
+    if (areaInput) {
+        areaInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault(); 
+                saveNewPage();
+            }
+        });
     }
 });
