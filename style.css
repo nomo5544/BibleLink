@@ -33,7 +33,7 @@ body {
 /* 4. Кнопка "+" */
 .add-tab-btn {
     position: fixed;
-    top: 5px;
+    top: 65px;
     left: 5px;
     z-index: 3000;
     background: #fff;
