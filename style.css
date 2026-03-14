@@ -248,36 +248,92 @@ body {
     opacity: 1;
 }
 
-/* Вирівнюємо кнопки таймера по висоті */
+/* Контейнер таймера — додаємо гнучкість */
+.timer-container {
+    position: fixed;
+    top: 10px;
+    left: 5px;
+    z-index: 3005; /* Підняв трохи вище */
+    background: #fff;
+    border: 1px solid #8b4513;
+    padding: 6px; /* Трохи більше внутрішнього відступу */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 120px; /* Трохи розширив для тексту START/PAUSE */
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Вирівнюємо кнопки таймера по висоті та в один ряд */
 .timer-controls {
     display: flex;
-    align-items: stretch; /* Розтягує кнопки по висоті контейнера */
-    gap: 8px;
-    height: 32px; /* Фіксуємо висоту для обох кнопок */
+    align-items: stretch; 
+    gap: 6px;
+    height: 30px; /* Фіксована висота кнопок */
 }
 
 .timer-btn.main-toggle {
     flex: 2;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     cursor: pointer;
     border: 1px solid #8b4513;
     background: #fff;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    text-transform: uppercase;
 }
 
 .timer-btn.reset {
-    width: 32px; /* Робимо її рівносторонньою (квадратною) */
+    width: 30px; /* Рівностороння кнопка */
+    height: 30px;
     flex: none;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     border: 1px solid #8b4513;
     background: #fff;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
+}
+
+/* Кнопка "+" під таймером */
+.add-tab-btn {
+    position: fixed;
+    top: 95px; /* Опустив нижче контейнера таймера */
+    left: 5px;
+    z-index: 3000;
+    background: #fff;
+    border: 1px solid #8b4513;
+    border-radius: 8px;
+    width: 40px; /* Квадратна під закладинки */
+    height: 40px;
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Опускаємо закладинки ще нижче */
+.tabs-container {
+    position: fixed;
+    left: 0;
+    top: 150px; /* Щоб не перекривалися з кнопкою "+" */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+    width: 50px;
 }
 .save-btn { 
     background: #2ecc71; /* Колір кнопки */
