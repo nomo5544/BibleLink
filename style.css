@@ -249,71 +249,97 @@ body {
     opacity: 1;
 }
 
-/* Контейнер таймера */
+/* --- Контейнер таймера --- */
 .timer-container {
     position: fixed;
-    top: 10px;
+    top: 5px;
+    left: 5px;
+    z-index: 3001;
+    background: #fff;
+    border: 1px solid #8b4513;
+    padding: 6px 8px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 120px; /* Трохи збільшив для текстових кнопок */
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.timer-display {
+    font-size: 28px;
+    color: #2c3e50;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.timer-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+/* Кнопка START / PAUSE */
+.timer-btn.main-toggle {
+    background: #fdfaf4;
+    border: 1px solid #8b4513;
+    border-radius: 4px;
+    padding: 4px 0;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    color: #5d2e0a;
+    flex: 2; /* Займає більше місця */
+    text-transform: uppercase;
+    min-width: 60px;
+}
+
+/* Кнопка скидання (рівностороння) */
+.timer-btn.reset {
+    background: #fdfaf4;
+    border: 1px solid #8b4513;
+    border-radius: 4px;
+    width: 26px; /* Фіксована ширина */
+    height: 26px; /* Така сама висота */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    color: #e74c3c;
+    flex: none; /* Не розтягується */
+}
+
+.timer-btn:hover {
+    background: #f7e7ce;
+    transform: scale(1.05);
+}
+
+/* --- Кнопка "+" під таймером --- */
+.add-tab-btn {
+    position: fixed;
+    top: 85px; /* Опустив нижче, щоб не заважати таймеру */
     left: 5px;
     z-index: 3000;
     background: #fff;
     border: 1px solid #8b4513;
-    padding: 2px 2px;
+    padding: 0;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 100px; /* Трохи розширено для горизонтальних кнопок */
-    text-align: center;
-    box-sizing: border-box;
-}
-
-/* Цифри таймера — компактніші */
-.timer-display {
-    font-size: 30px;
-    color: #2c3e50;
-    margin-bottom: 2px;
-   /* font-family: 'Courier New', monospace; */
-    line-height: 1;
-}
-
-/* Кнопки в один ряд */
-.timer-controls {
-    display: flex;
-    flex-direction: row; /* Горизонтально */
-    justify-content: center;
-    gap: 8px;
-}
-
-.timer-btn {
-    background: none;
-    border: none;
-    padding: 2px;
+    width: 40px; /* Робимо її квадратною як закладки */
+    height: 40px;
     cursor: pointer;
-    font-size: 18px; /* Розмір значків */
-    transition: transform 0.1s, color 0.2s;
+    font-size: 24px;
     display: flex;
-    align-items: center;
     justify-content: center;
-}
-
-/* Кольори для значків */
-.timer-btn.reset { color: #7f8c8d; } /* Сірий */
-/* Якщо хочете, щоб змінювався колір самого значка (працює не на всіх емодзі) */
-.timer-btn.start { color: #27ae60 !important; }
-.timer-btn.stop  { color: #c0392b !important; }
-
-/* Більш надійний спосіб: зміна кольору тіні навколо значка */
-.timer-btn.start {
-    text-shadow: 0 0 5px rgba(39, 174, 96, 0.5);
-}
-.timer-btn.stop {
-    text-shadow: 0 0 5px rgba(192, 57, 43, 0.5);
-}
-
-.timer-btn:hover {
-    transform: scale(1.2);
-}
-
-.timer-btn:active {
-    transform: scale(0.9);
+    align-items: center;
 }
 
 .save-btn { 
