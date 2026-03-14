@@ -267,17 +267,23 @@ body {
     gap: 4px;
 }
 
+.timer-display {
+    font-size: 28px;
+    color: #2c3e50;
+    line-height: 1;
+}
+
 /* Вирівнюємо кнопки таймера по висоті та в один ряд */
 .timer-controls {
     display: flex;
     align-items: stretch; 
     gap: 4px;
-    height: 28px; /* Фіксована висота кнопок */
+    height: 26px; /* Фіксована висота кнопок */
 }
 
 .timer-btn.main-toggle {
     flex: 2;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
     border: 1px solid #8b4513;
@@ -291,8 +297,8 @@ body {
 }
 
 .timer-btn.reset {
-    width: 28px; /* Рівностороння кнопка */
-    height: 28px;
+    width: 26px; /* Рівностороння кнопка */
+    height: 26px;
     flex: none;
     font-size: 16px;
     cursor: pointer;
@@ -303,6 +309,10 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0;
+}
+.timer-btn:hover {
+    background: #f7e7ce;
+    transform: scale(1.05);
 }
 
 .save-btn { 
