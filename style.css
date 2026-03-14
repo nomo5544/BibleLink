@@ -247,7 +247,7 @@ body {
     opacity: 1;
 }
 
-/* --- ТАЙМЕР (Синхронізовано з вашими розмірами) --- */
+/* --- ТАЙМЕР (Повна синхронізація розмірів) --- */
 .timer-container {
     position: fixed;
     top: 8px;
@@ -255,10 +255,11 @@ body {
     z-index: 3000;
     background: #fff;
     border: 1px solid #8b4513;
-    padding: 14px;
-    border-radius: 8px; /* Зовнішній радіус */
+    padding: 4px; /* Чітко 4px з усіх боків */
+    border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 100px;
+    /* Розрахунок: 80 (старт) + 24 (reset) + 4 (gap) + 8 (padding L/R) = 116px */
+    width: 116px; 
     text-align: center;
     box-sizing: border-box;
     display: flex;
@@ -275,9 +276,10 @@ body {
 
 .timer-controls {
     display: flex;
-    justify-content: center; /* Центруємо кнопки всередині */
+    /* Прибираємо center, щоб кнопки займали чітко свій простір від краю до краю */
+    justify-content: flex-start; 
     gap: 4px;
-    height: 24px; 
+    height: 24px; /* Твоя висота */
 }
 
 .timer-btn {
@@ -285,25 +287,25 @@ body {
     border: 1px solid #8b4513;
     background: #fff;
     color: #000;
-    border-radius: 4px; /* Менший радіус для кнопок всередині */
+    border-radius: 4px; /* Твій новий радіус */
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     outline: none;
     transition: all 0.2s ease;
+    box-sizing: border-box; /* Рамка входить у розмір кнопки */
+    flex-shrink: 0; /* ЗАБОРОНЯЄМО стискання кнопки браузером */
 }
 
 .timer-btn.main-toggle {
-    width: 80px; /* ФІКСОВАНА ШИРИНА */
-    flex: none;  /* Прибираємо розтягування */
-    font-size: 18px; /* Трохи менше, щоб текст START вліз вільно */
+    width: 80px; /* Твоя фіксована ширина */
+    font-size: 18px;
     text-transform: uppercase;
 }
 
 .timer-btn.reset {
-    width: 24px; /* Квадратна кнопка */
-    flex: none;
+    width: 24px; /* Твоя фіксована ширина */
     font-size: 16px;
 }
 
@@ -312,9 +314,7 @@ body {
     transform: scale(1.05);
 }
 
-.timer-btn:focus { 
-    outline: none; 
-}
+.timer-btn:focus { outline: none; }
 
 .save-btn { 
     background: #2ecc71; /* Колір кнопки */
