@@ -247,7 +247,7 @@ body {
     opacity: 1;
 }
 
-/* --- ТАЙМЕР (Залізна фіксація 100px) --- */
+/* --- ТАЙМЕР (Фінальна фіксація без "стрибків") --- */
 .timer-container {
     position: fixed;
     top: 8px;
@@ -258,26 +258,23 @@ body {
     padding: 4px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 100px; /* Суворо 100 */
+    width: 100px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
 }
 
 .timer-display {
     font-size: 28px;
     color: #2c3e50;
-    line-height: 1;
+    line-height: 1.2;
     text-align: center;
+    margin-bottom: 4px;
 }
 
 .timer-controls {
     display: flex;
     gap: 4px;
     height: 24px;
-    /* Вимикаємо будь-які спроби flexbox-у розтягнути кнопки */
-    align-items: center; 
+    width: 92px; /* 100 - 8 (padding) */
 }
 
 .timer-btn {
@@ -285,40 +282,33 @@ body {
     border: 1px solid #8b4513;
     background: #fff;
     color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 4px; /* Твій радіус */
+    height: 24px;
+    line-height: 22px; /* Вирівнювання тексту по вертикалі всередині кнопки */
+    text-align: center;
     padding: 0;
     outline: none;
     box-sizing: border-box;
-    border-radius: 4px;
-    transition: background 0.2s, transform 0.2s;
-    /* ГАРАНТІЯ НЕ-СТИСКАННЯ ТА НЕ-РОЗШИРЕННЯ */
-    flex: none !important; 
+    display: block; /* Пряме блокування розміру */
+    flex: none;
 }
 
 .timer-btn.main-toggle {
-    /* Жорсткий корсет: мін, макс і звичайна ширина однакові */
-    width: 64px !important;
-    min-width: 64px !important;
-    max-width: 64px !important;
-    
-    font-size: 15px; /* Підібрано, щоб PAUSE не тиснуло на краї */
+    width: 64px;
+    font-size: 18px;
     text-transform: uppercase;
-    overflow: hidden; /* Щоб текст не вилазив за рамки */
-    white-space: nowrap; /* Заборона переносу рядка */
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .timer-btn.reset {
-    width: 24px !important;
-    min-width: 24px !important;
-    max-width: 24px !important;
+    width: 24px;
     font-size: 16px;
 }
 
 .timer-btn:hover {
     background: #f0f0f0;
-    transform: scale(1.05);
+    transform: scale(1.5);
 }
 .save-btn { 
     background: #2ecc71; /* Колір кнопки */
