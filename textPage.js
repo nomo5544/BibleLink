@@ -306,6 +306,7 @@ let seconds = 0;
 
 function updateTimerDisplay() {
     const display = document.getElementById('timer-display');
+    if (!display) return;
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     display.innerText = 
@@ -317,15 +318,15 @@ function toggleTimer() {
     if (!btn) return;
     
     if (timerInterval) {
-        // ЗУПИНКА
+        // ЗУПИНКА (PAUSE -> START)
         clearInterval(timerInterval);
         timerInterval = null;
-        btn.innerHTML = "▶️"; 
+        btn.innerText = "START"; // Повертаємо текст START
         btn.classList.remove('stop');
         btn.classList.add('start');
     } else {
-        // СТАРТ
-        btn.innerHTML = "⏸"; 
+        // СТАРТ (START -> PAUSE)
+        btn.innerText = "PAUSE"; // Змінюємо на текст PAUSE
         btn.classList.remove('start');
         btn.classList.add('stop');
         
@@ -346,7 +347,7 @@ function resetTimer() {
     
     const btn = document.getElementById('timer-toggle');
     if (btn) {
-        btn.innerHTML = "▶️";
+        btn.innerText = "START"; // Завжди повертаємо START при скиданні
         btn.classList.remove('stop');
         btn.classList.add('start');
     }
