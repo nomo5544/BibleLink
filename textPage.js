@@ -270,76 +270,7 @@ function updateTooltipPosition(event) {
     // Він більше не буде спамити помилками в консоль.
 }
 
-function getCombinedText(book, chapter, versesStr) {
-    const verseNumbers = versesStr.match(/\d+/g);
-    if (!verseNumbers) return null;
 
-    let result = [];
-    if (versesStr.includes('-') || versesStr.includes('–')) {
-        const start = parseInt(verseNumbers[0]);
-        const end = parseInt(verseNumbers[verseNumbers.length - 1]);
-        for (let i = start; i <= end; i++) {
-            const ref = `${book} ${chapter}:${i}`;
-            if (bibleData[ref]) result.push(`<span class="verse-num">${i}</span> ${bibleData[ref]}`);
-        }
-    } else {
-        verseNumbers.forEach(v => {
-            const ref = `${book} ${chapter}:${v}`;
-            if (bibleData[ref]) result.push(`<span class="verse-num">${v}</span> ${bibleData[ref]}`);
-        });
-    }
-    return result.length > 0 ? result.join('<br>') : null;
-}
-
-function showTooltip(event, text) {
-    hideTooltip(); // Видаляємо старий, якщо є
-
-    tooltip = document.createElement('div');
-    tooltip.id = 'bible-tooltip';
-    tooltip.className = 'bible-tooltip'; // Стилі беруться з вашого CSS
-    tooltip.innerHTML = text;
-    document.body.appendChild(tooltip);
-
-    updateTooltipPosition(event);
-
-    // Додаємо клас show для плавного переходу з CSS
-    requestAnimationFrame(() => {
-        tooltip.classList.add('show');
-    });
-}
-
-function updateTooltipPosition(event) {
-    if (!tooltip) return;
-
-    const gap = 15;
-    const tooltipWidth = tooltip.offsetWidth || 500;
-    const tooltipHeight = tooltip.offsetHeight;
-    
-    let left = event.pageX + gap;
-    let top = event.pageY + gap;
-
-    // Перевірка правого краю (як у другому коді)
-    if (left + tooltipWidth > window.innerWidth + window.scrollX) {
-        left = event.pageX - tooltipWidth - gap;
-    }
-
-    // Перевірка нижнього краю (щоб не провалювався вниз)
-    if (top + tooltipHeight > window.innerHeight + window.scrollY) {
-        top = event.pageY - tooltipHeight - gap;
-    }
-
-    // Захист від виходу за верхню або ліву межу
-    if (top < window.scrollY) top = window.scrollY + 5;
-    if (left < window.scrollX) left = window.scrollX + 5;
-
-    tooltip.style.left = left + 'px';
-    tooltip.style.top = top + 'px';
-   
-        // Плавна поява через клас
-    setTimeout(() => {
-        tooltip.classList.add('show');
-    }, 10);
-}
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(err => console.error(err));
