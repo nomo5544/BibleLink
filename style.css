@@ -256,7 +256,7 @@ body {
     z-index: 3000; /* Підняв трохи вище */
     background: #fff;
     border: 1px solid #8b4513;
-    padding: 6px; /* Трохи більше внутрішнього відступу */
+    padding: 4px; /* Трохи більше внутрішнього відступу */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     width: 100px; /* Трохи розширив для тексту START/PAUSE */
@@ -264,14 +264,14 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 }
 
 /* Вирівнюємо кнопки таймера по висоті та в один ряд */
 .timer-controls {
     display: flex;
     align-items: stretch; 
-    gap: 6px;
+    gap: 4px;
     height: 28px; /* Фіксована висота кнопок */
 }
 
@@ -282,7 +282,7 @@ body {
     cursor: pointer;
     border: 1px solid #8b4513;
     background: #fff;
-    border-radius: 4px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
