@@ -284,7 +284,6 @@ body {
 .timer-btn.main-toggle {
     flex: 2;
     font-size: 18px;
-    font-weight: bold;
     cursor: pointer;
     border: 1px solid #8b4513;
     background: #fff;
