@@ -233,7 +233,6 @@ body {
 .bible-tooltip.show {
     opacity: 1;
 }
-
 /* Номер вірша всередині спливаючого вікна */
 .bible-tooltip .verse-num {
     font-size: 17px !important;    /* ТУТ задайте точний розмір у пікселях (наприклад, 14) */
