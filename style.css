@@ -249,99 +249,37 @@ body {
     opacity: 1;
 }
 
-/* --- Контейнер таймера --- */
-.timer-container {
-    position: fixed;
-    top: 5px;
-    left: 5px;
-    z-index: 3001;
-    background: #fff;
-    border: 1px solid #8b4513;
-    padding: 6px 8px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 120px; /* Трохи збільшив для текстових кнопок */
-    text-align: center;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-}
-
-.timer-display {
-    font-size: 28px;
-    color: #2c3e50;
-  
-    font-weight: bold;
-    line-height: 1;
-}
-
+/* Вирівнюємо кнопки таймера по висоті */
 .timer-controls {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    width: 100%;
+    align-items: stretch; /* Розтягує кнопки по висоті контейнера */
+    gap: 8px;
+    height: 32px; /* Фіксуємо висоту для обох кнопок */
 }
 
-/* Кнопка START / PAUSE */
 .timer-btn.main-toggle {
-    background: #fdfaf4;
-    border: 1px solid #8b4513;
-    border-radius: 4px;
-    padding: 4px 0;
-    cursor: pointer;
-    font-size: 12px;
+    flex: 2;
+    font-size: 14px;
     font-weight: bold;
-    color: #5d2e0a;
-    flex: 2; /* Займає більше місця */
-    text-transform: uppercase;
-    min-width: 60px;
-}
-
-/* Кнопка скидання (рівностороння) */
-.timer-btn.reset {
-    background: #fdfaf4;
-    border: 1px solid #8b4513;
-    border-radius: 4px;
-    width: 26px; /* Фіксована ширина */
-    height: 26px; /* Така сама висота */
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
-    font-size: 16px;
-    color: #e74c3c;
-    flex: none; /* Не розтягується */
-}
-
-.timer-btn:hover {
-    background: #f7e7ce;
-    transform: scale(1.05);
-}
-
-/* --- Кнопка "+" під таймером --- */
-.add-tab-btn {
-    position: fixed;
-    top: 85px; /* Опустив нижче, щоб не заважати таймеру */
-    left: 5px;
-    z-index: 3000;
+    border: 1px solid #8b4513;
     background: #fff;
-    border: 1px solid #8b4513;
-    padding: 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 40px; /* Робимо її квадратною як закладки */
-    height: 40px;
-    cursor: pointer;
-    font-size: 24px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
+.timer-btn.reset {
+    width: 32px; /* Робимо її рівносторонньою (квадратною) */
+    flex: none;
+    font-size: 18px;
+    cursor: pointer;
+    border: 1px solid #8b4513;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .save-btn { 
     background: #2ecc71; /* Колір кнопки */
     color: white; 
