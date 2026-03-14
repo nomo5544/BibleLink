@@ -65,11 +65,13 @@
       }
       displayVersion();
     </script>
+<button class="add-tab-btn" onclick="openAddDialog()" title="Додати нову сторінку">+</button>
+
 <div id="pwa-timer" class="timer-container">
     <div id="timer-display" class="timer-display">00:00</div>
     <div class="timer-controls">
-        <button id="timer-toggle" onclick="toggleTimer()" class="timer-btn start" title="Старт/Стоп">▶️</button>
-        <button id="timer-reset" onclick="resetTimer()" class="timer-btn reset" title="Скинути">🔁</button>
+        <button id="timer-toggle" onclick="toggleTimer()" class="timer-btn main-toggle start">START</button>
+        <button id="timer-reset" onclick="resetTimer()" class="timer-btn reset" title="Скинути">↺</button>
     </div>
 </div>
 </body>
