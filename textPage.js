@@ -317,18 +317,15 @@ function toggleTimer() {
     if (!btn) return;
     
     if (timerInterval) {
-        // РЕЖИМ ПАУЗА
+        // ЗУПИНКА
         clearInterval(timerInterval);
         timerInterval = null;
-        
         btn.innerHTML = "▶️"; 
-        // Змінюємо класи для кольору
         btn.classList.remove('stop');
         btn.classList.add('start');
     } else {
-        // РЕЖИМ СТАРТ
+        // СТАРТ
         btn.innerHTML = "⏸"; 
-        // Змінюємо класи для кольору
         btn.classList.remove('start');
         btn.classList.add('stop');
         
@@ -344,14 +341,12 @@ function resetTimer() {
         clearInterval(timerInterval);
         timerInterval = null;
     }
-    
     seconds = 0;
     updateTimerDisplay();
     
     const btn = document.getElementById('timer-toggle');
     if (btn) {
         btn.innerHTML = "▶️";
-        // Скидаємо колір на початковий (зелений)
         btn.classList.remove('stop');
         btn.classList.add('start');
     }
