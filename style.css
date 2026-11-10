@@ -33,14 +33,14 @@ body {
 .add-tab-btn {
     position: fixed;
     top: 85px;
-    left: 5px;
+    left: 0px;
     z-index: 3000;
     background: #fff;
     border: 1px solid #8b4513;
     padding: 4px 5px;
-    border-radius: 8px;
+    border-radius: 8px 0 0 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 41px; /* Трохи розширено для горизонтальних кнопок */
+    width: 40px; /* Трохи розширено для горизонтальних кнопок */
     text-align: center;
     box-sizing: border-box;
     cursor: pointer;
@@ -48,7 +48,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 5px; /* Фіксований відступ від кнопки до першої закладки */
+    margin-bottom: 0px; /* Фіксований відступ від кнопки до першої закладки */
     flex-shrink: 0;      /* Забороняємо кнопці стискатися */
 }
 
