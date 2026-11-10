@@ -40,7 +40,7 @@ body {
     padding: 4px 5px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 20px; /* Трохи розширено для горизонтальних кнопок */
+    width: 40px; /* Трохи розширено для горизонтальних кнопок */
     text-align: center;
     box-sizing: border-box;
     cursor: pointer;
