@@ -38,7 +38,7 @@ body {
     background: #fff;
     border: 1px solid #8b4513;
     padding: 4px 5px;
-    border-radius: 8px 0 0 8px;
+    border-radius: 0 8px 8px 0;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     width: 40px; /* Трохи розширено для горизонтальних кнопок */
     text-align: center;
