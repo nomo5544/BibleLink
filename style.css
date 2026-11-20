@@ -32,7 +32,7 @@ body {
 /* 4. Кнопка "+" */
 .add-tab-btn {
     position: fixed;
-    top: 95px;
+    top: 90px;
     left: 0px;
     z-index: 3000;
     background: #fff;
@@ -56,7 +56,7 @@ body {
     position: relative;
     background: #F7E7CE;
     width: 30px;   /* ШИРИНА закладки (було 50px) */
-    padding: 25px 5px 15px 5px;
+    padding: 15px 5px 15px 5px;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     transform: rotate(180deg);
