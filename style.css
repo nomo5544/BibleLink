@@ -272,7 +272,7 @@ body {
 
 .timer-controls {
     display: flex;
-    gap: 2px;
+    gap: 4px;
     height: 24px;
     width: 92px; /* 100 - 8 (padding) */
 }
@@ -282,7 +282,7 @@ body {
     border: 1px solid #8b4513;
     background: #fff;
     color: #000;
-    border-radius: 4px; /* Твій радіус */
+    border-radius: 3px; /* Твій радіус */
     height: 24px;
     line-height: 22px; /* Вирівнювання тексту по вертикалі всередині кнопки */
     text-align: center;
