@@ -32,7 +32,7 @@ body {
 /* 4. Кнопка "+" */
 .add-tab-btn {
     position: fixed;
-    top: 85px;
+    top: 95px;
     left: 0px;
     z-index: 3000;
     background: #fff;
@@ -86,7 +86,7 @@ body {
     top: 50%; /* Центруємо по висоті закладинки */
     left: -20px; /* Виносимо за межі (ліворуч у коді, що стає праворуч після rotate) */
     transform: translateY(-50%) rotate(180deg); /* Корекція положення: піднімаємо на половину власної висоти */
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #e74c3c;
     opacity: 0;
