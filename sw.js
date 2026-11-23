@@ -16,8 +16,8 @@ const OPTIONAL_ASSETS = [
   './fone.jpg',
   './icon192.png',
   './icon512.png',
-  './icon-maskable-192.png',
-  './icon-maskable-512.png'
+ //  './icon-maskable-192.png',
+ //  './icon-maskable-512.png'
 ];
 
 self.addEventListener('install', event => {
