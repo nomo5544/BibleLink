@@ -1,9 +1,0 @@
-{
-  "manifest_version": 3,
-  "name": "Bible text preview",
-  "version": "2.1",
-  "permissions": ["clipboardRead", "storage", "tabs", "offscreen"],
-  "background": { "service_worker": "background.js" },
-  "action": { "default_title": "Натисни" },
-  "icons": { "16": "icon.png", "48": "icon.png", "128": "icon.png" }
-}
