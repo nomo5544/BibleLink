@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Text Folder</title>
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="icon192.png">
+</head>
+<body>
+    <div class="folder-container empty-folder" id="folder-container">
+        <div id="side-tabs" class="tabs-container"></div>
+
+        <main class="paper-page">
+            <div id="textcontent">
+                <p>«Коли хто говорить, говори, як Божі слова. Коли хто служить, то служи, як від сили, яку дає Бог, щоб Бог прославлявся в усьому Ісусом Христом, що Йому слава та влада на віки вічні, амінь.» (1 Петра 4:11)</p>
+            </div>
+            <div style="text-align: center; padding: 20px; opacity: 0.3; font-size: 13px; font-family: sans-serif;">
+                Версія: <span id="app-version" style="cursor: pointer;">...</span>
+            </div>
+        </main>
+    </div>
+
+    <div id="addDialog" class="modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header-container">
+                <input type="text" id="pageTitle" placeholder="Назва вкладки (напр. Частина 1)">
+                <div class="modal-buttons">
+                    <button type="button" class="save-btn" id="saveBtn">Зберегти</button>
+                    <button type="button" class="cancel-btn" id="cancelBtn">Скасувати</button>
+                </div>
+            </div>
+            <div contenteditable="true" id="inputArea" placeholder="Вставте або напишіть текст тут..."></div>
+        </div>
+    </div>
+
+    <button type="button" id="add-tab-btn" class="add-tab-btn" aria-label="Додати сторінку">+</button>
+
+    <!-- Таймер прихований, доки не відкрито жодної сторінки з текстом -->
+    <div id="pwa-timer" class="timer-container" hidden>
+        <div id="timer-display" class="timer-display">00:00</div>
+        <div class="timer-controls">
+            <button id="resetTimerBtn" class="timer-btn reset">⟳</button>
+            <button id="timer-toggle" class="timer-btn start">START</button>
+        </div>
+    </div>
+
+    <script src="textPage.js"></script>
+</body>
+</html>
