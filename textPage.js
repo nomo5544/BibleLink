@@ -127,7 +127,7 @@ const BIBLE_REGEX_SRC =
 
 // Короткі скорочення, що збігаються зі звичайними словами («як 5», «об 8»):
 // розпізнаємо лише у формі «Як 5:3» (з двокрапкою й віршем).
-const AMBIGUOUS_ABBR = new Set(['суд']);
+const AMBIGUOUS_ABBR = new Set(['сдаа']);
 
 function findReferences(text) {
     const re = new RegExp(BIBLE_REGEX_SRC, 'giu');
