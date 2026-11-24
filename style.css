@@ -55,7 +55,7 @@ body {
 .side-tab {
     position: relative;
     background: #F7E7CE;
-    width: 30px;   /* ШИРИНА закладки (було 50px) */
+    width: 30px;   /* ШИРИНА закладки (відкрита 50px) */
     padding: 15px 5px 15px 5px;
     writing-mode: vertical-rl;
     text-orientation: mixed;
