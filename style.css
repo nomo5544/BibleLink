@@ -108,7 +108,7 @@ body {
     margin-left: 0;
     /* Поля: зліва залишено місце під закладки, праворуч менше. На широких екранах поля
        ростуть пропорційно (6% ширини), як в Google Docs; щоб зменшити їх ще — зменште 6vw */
-    padding: 50px max(32px, 8vw) 50px max(72px, 12vw);
+    padding: 50px max(32px, 8vw) 50px max(72px, 14vw);
     box-shadow: -5px 0 15px rgba(0,0,0,0.1);
     min-height: 100vh;
     box-sizing: border-box;
