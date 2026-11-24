@@ -431,7 +431,7 @@ body {
         padding: 90px 10px 30px 48px; /* зверху місце для таймера, зліва для закладок */
     }
     #textcontent {
-        font-size: 22.5px;   /* 22.5 / 14.667 = 1.534;  22.5 / 16 = 1.406 */
+        font-size: 21.5px;   /* 22.5 / 14.667 = 1.534;  22.5 / 16 = 1.406 */
         --k-pt: 1.534;
         --k-px: 1.406;
     }
@@ -448,7 +448,7 @@ body {
         gap: 10px;
     }
     .bible-tooltip {
-        font-size: 17px;
+        font-size: 18px;
     }
 }
 
