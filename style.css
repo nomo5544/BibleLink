@@ -1,0 +1,467 @@
+/* 1. Глобальна база */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0e6d2;
+}
+/* --- Контейнер папки --- */
+.folder-container {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}
+
+.tabs-container {
+    position: fixed;
+    left: 0;
+    top: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100; /* Піднімаємо вище за все */
+    width: 50px;
+    pointer-events: auto; /* Дозволяємо кліки */
+}
+
+/* Додайте це на початку, щоб ширина завжди рахувалася однаково */
+.side-tab, .add-tab-btn {
+    box-sizing: border-box; 
+}
+
+/* 4. Кнопка "+" */
+.add-tab-btn {
+    position: fixed;
+    top: 90px;
+    left: 0px;
+    z-index: 3000;
+    background: #fff;
+    border: 1px solid #8b4513;
+    padding: 4px 5px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 40px; /* Трохи розширено для горизонтальних кнопок */        
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px; /* Фіксований відступ від кнопки до першої закладки */
+    flex-shrink: 0;      /* Забороняємо кнопці стискатися */
+}
+
+.side-tab {
+    position: relative;
+    background: #F7E7CE;
+    width: 30px;   /* ШИРИНА закладки (було 50px) */
+    padding: 15px 5px 15px 5px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    border: 1px solid #8b4513;
+    border-right: none;
+    font-weight: normal !important;
+    color: #5d2e0a;
+    transition: all 0.2s ease;
+}
+
+.side-tab.active {
+    background: #fff;
+    width: 40px;
+    color: #000;
+    margin-right: -15px;
+    padding-left: 15px; 
+    border-right: none;
+    box-shadow: -4px 4px 10px rgba(0,0,0,0.1);
+    z-index: 11;
+}
+
+/* --- Хрестик видалення (Винесений за межі) --- */
+.delete-tab {
+    position: absolute;
+    top: 50%; /* Центруємо по висоті закладинки */
+    left: -20px; /* Виносимо за межі (ліворуч у коді, що стає праворуч після rotate) */
+    transform: translateY(-50%) rotate(180deg); /* Корекція положення: піднімаємо на половину власної висоти */
+    font-size: 20px;
+    font-weight: bold;
+    color: #e74c3c;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    writing-mode: horizontal-tb;
+    cursor: pointer;
+    z-index: 100;
+}
+
+/* Показуємо хрестик при наведенні на закладку */
+.side-tab:hover .delete-tab {
+    opacity: 1;
+}
+
+/* --- Основна сторінка --- */
+ .paper-page {
+    background: white;
+    flex: 1;
+    margin-left: 0;
+    /* Поля: зліва залишено місце під закладки, праворуч менше. На широких екранах поля
+       ростуть пропорційно (6% ширини), як в Google Docs; щоб зменшити їх ще — зменште 6vw */
+    padding: 50px max(32px, 6vw) 50px max(72px, 6vw);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    min-height: 100vh;
+    box-sizing: border-box;
+    z-index: 1;
+    min-width: 0; /* дозволяє стискати сторінку, коли в тексті є широка таблиця */
+}
+
+/* --- ОСНОВНИЙ ТЕКСТ (Форматування) --- */
+#textcontent {
+    max-width: none;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    /* РОЗМІР ТЕКСТУ. Звичайний текст Google Docs (11pt) показується як 27px (≈ 12,4pt):
+       трохи більше за «по ширині екрана» в Docs, щоб зручніше читати.
+       Щоб змінити розмір, змініть три числа разом:
+       font-size = X px;  --k-pt = X / 14.667;  --k-px = X / 16  (приклад: 27 → 1.841 і 1.6875) */
+    font-size: 27px;
+    line-height: 1.6;
+    --k-pt: 1.841;
+    --k-px: 1.6875;
+}
+
+/* Окремо для посилань всередині тексту */
+#textcontent .bible-link {
+    color: blue !important;
+    text-decoration: none !important;
+}
+
+/* Заголовки: розмір і відступи задає сам документ (як у Google Docs) */
+#textcontent h1, #textcontent h2, #textcontent h3,
+#textcontent h4, #textcontent h5, #textcontent h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+}
+/* Заголовки з інших джерел, без власного розміру */
+#textcontent h1.plain-h { font-size: 1.8em; font-weight: bold; margin: 0.6em 0 0.3em; }
+#textcontent h2.plain-h { font-size: 1.5em; font-weight: bold; margin: 0.6em 0 0.3em; }
+#textcontent h3.plain-h { font-size: 1.25em; font-weight: bold; margin: 0.5em 0 0.3em; }
+#textcontent h4.plain-h, #textcontent h5.plain-h, #textcontent h6.plain-h { font-weight: bold; margin: 0.5em 0 0.3em; }
+
+#textcontent { overflow-x: auto; }
+#textcontent img { max-width: 100%; height: auto !important; }
+#textcontent table { max-width: 100%; }
+#textcontent a { color: #1155cc; }
+
+/* --- Модальне вікно --- */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: flex; 
+    justify-content: center;
+    align-items: flex-start; /* Притискаємо до верху, щоб заголовок не тікав */
+    padding-top: 50px;       /* Відступ від верхнього краю екрана */
+    box-sizing: border-box;
+    overflow-y: auto;        /* Дозволяємо прокрутку всієї модалки, якщо екран малий */
+}
+
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;        /* Обмежуємо висоту вікна до 85% екрана */
+}
+
+/* Вирівнювання заголовка та кнопок в один ряд */
+.modal-header-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+#pageTitle {
+    flex: 1; /* Займає всю ширину */
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid #d2b48c;
+    border-radius: 8px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+/* --- Внутрішнє поле вводу --- */
+#inputArea {
+    border: 2px solid #d2b48c;
+    padding: 20px;
+    flex-grow: 1;            /* Поле займає весь доступний простір у вікні */
+    min-height: 300px;
+    font-size: 20px;
+    border-radius: 8px;
+    background: #fff;
+    overflow-y: auto;        /* ВЛАСНА ПРОКРУТКА: заголовок стоїть, текст крутиться */
+    outline: none;
+}
+
+/* Рядок заголовка та кнопок (залишається нерухомим) */
+.modal-header-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-shrink: 0;          /* Забороняємо заголовку стискатися */
+}
+/* Стиль посилань як у розширенні */
+.bible-link {
+    color: blue;
+    text-decoration: none; /* Жодного підкреслення */
+    cursor: pointer;
+}
+
+/* Статичний вигляд тултіпа для великих текстів */
+.bible-tooltip {
+    position: absolute;
+    z-index: 2000;
+    background: #fff;
+    border: 1px solid #8b4513;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    max-width: 500px;
+    max-height: 1000px;
+    font-size: 20px;
+    line-height: 1.3;
+    pointer-events: none;
+    opacity: 0; 
+    transition: opacity 0.4s ease-in-out;
+    box-sizing: border-box;
+}
+
+.bible-tooltip.show {
+    opacity: 1;
+}
+/* Номер вірша всередині спливаючого вікна */
+.bible-tooltip .verse-num {
+    font-size: 17px !important;    /* ТУТ задайте точний розмір у пікселях (наприклад, 14) */
+    font-weight: normal !important; /* ПРИМУСОВО прибираємо жирність */
+    color: #8b4513 !important;      /* Коричневий колір */
+    margin-right: 4px !important;
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+/* Клас для відображення */
+.bible-tooltip.show {
+    opacity: 1;
+}
+
+/* --- ТАЙМЕР (Фінальна фіксація без "стрибків") --- */
+.timer-container {
+    position: fixed;
+    top: 8px;
+    left: 5px;
+    z-index: 3000;
+    background: #fff;
+    border: 1px solid #8b4513;
+    padding: 4px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 100px;
+    box-sizing: border-box;
+}
+
+.timer-display {
+    font-size: 28px;
+    color: #2c3e50;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.timer-controls {
+    display: flex;
+    gap: 4px;
+    height: 24px;
+    width: 92px; /* 100 - 8 (padding) */
+}
+
+.timer-btn {
+    cursor: pointer;
+    border: 1px solid #8b4513;
+    background: #fff;
+    color: #000;
+    border-radius: 3px; /* Твій радіус */
+    height: 24px;
+    line-height: 22px; /* Вирівнювання тексту по вертикалі всередині кнопки */
+    text-align: center;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    display: block; /* Пряме блокування розміру */
+    flex: none;
+}
+
+/* Використовуємо твій ID з JS */
+#timer-toggle {
+    width: 64px !important;
+    min-width: 64px !important;
+    max-width: 64px !important;
+    flex: none !important;
+    
+    height: 24px;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid #8b4513;
+    background: #fff;
+    color: #000;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Кнопка Reset — теж фіксуємо */
+.timer-btn.reset {
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    flex: none !important;
+    height: 24px;
+    border-radius: 4px;
+}
+
+/* Твої класи .start та .stop (якщо захочеш додати їм різні кольори пізніше) */
+#timer-toggle.start {
+    /* Тут можна нічого не писати, поки ми на білому фоні */
+}
+
+#timer-toggle.stop {
+    /* Тут теж, головне — ширина заблокована вище */
+}
+
+.timer-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.50);
+}
+.save-btn { 
+    background: #2ecc71; /* Колір кнопки */
+    color: white; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    border: none; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+.cancel-btn { 
+    background: #e74c3c; /* Колір кнопки */
+    color: white; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    border: none; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+/* Відображення фонової картинки, коли немає вкладок */
+/* Фонова картинка з легким затемненням */
+.folder-container.empty-folder .paper-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9)), url('fone.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent; /* Робимо сторінку прозорою, щоб бачити фото */
+}
+/* Текст цитати на фоні картинки */
+.folder-container.empty-folder #textcontent p {
+    color: #ffffff !important; /* Білий колір тексту */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9); /* Густа тінь для читабельності */
+    text-align: center;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+/* Додатково: колір версії додатка теж можна зробити світлішим на фоні */
+.folder-container.empty-folder #app-version,
+.folder-container.empty-folder .paper-page div[style*="opacity: 0.3"] {
+    color: #ffffff !important;
+    opacity: 0.7 !important;
+}
+
+/* ===== Додано в оновленні ===== */
+
+/* Таймер прихований, поки не відкрито сторінку з текстом */
+.timer-container[hidden] {
+    display: none;
+}
+
+.bible-tooltip {
+    max-width: min(500px, 90vw);
+}
+
+/* Сенсорні екрани: хрестик видалення видно на активній вкладці (немає наведення) */
+@media (hover: none) {
+    .side-tab.active .delete-tab {
+        opacity: 1;
+    }
+    .timer-btn:hover {
+        transform: none;
+    }
+}
+
+/* Вузькі екрани (телефон) */
+@media (max-width: 600px) {
+    .paper-page {
+        padding: 90px 10px 30px 48px; /* зверху місце для таймера, зліва для закладок */
+    }
+    #textcontent {
+        font-size: 22.5px;   /* 22.5 / 14.667 = 1.534;  22.5 / 16 = 1.406 */
+        --k-pt: 1.534;
+        --k-px: 1.406;
+    }
+    .modal {
+        padding-top: 16px;
+    }
+    .modal-content {
+        width: 96%;
+        padding: 14px;
+    }
+    .modal-header-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .bible-tooltip {
+        font-size: 17px;
+    }
+}
+
+/* Закладки й кнопка «+» зникають при прокручуванні вниз і з'являються на самому початку сторінки */
+.tabs-container, .add-tab-btn {
+    transition: transform 0.25s ease, opacity 0.25s ease, visibility 0s linear 0s;
+}
+body.scrolled-down .tabs-container,
+body.scrolled-down .add-tab-btn {
+    transform: translateX(-110%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease, visibility 0s linear 0.25s;
+}
