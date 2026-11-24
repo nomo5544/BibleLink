@@ -318,9 +318,9 @@ body {
 
 /* Використовуємо твій ID з JS */
 #timer-toggle {
-    width: 64px !important;
-    min-width: 64px !important;
-    max-width: 64px !important;
+    width: 62px !important;
+    min-width: 60px !important;
+    max-width: 62px !important;
     flex: none !important;
     
     height: 24px;
